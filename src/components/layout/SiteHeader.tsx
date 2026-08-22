@@ -28,7 +28,7 @@ export function SiteHeader() {
             className="inline-flex shrink-0 items-center"
             aria-label="Suzette Sun, back to top"
           >
-            <BrandLogo variant="light" priority className="h-6 w-auto md:h-7" />
+            <BrandLogo variant="light" priority className="h-7 w-auto md:h-8" />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">

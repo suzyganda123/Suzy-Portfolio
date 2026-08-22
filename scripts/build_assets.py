@@ -125,35 +125,75 @@ def process_hero_asset():
 
 
 def process_logos():
-    """Brand marks from Logo/ — light, dark, and color variants with alpha."""
+    """Brand marks from Logo/.
+
+    Naming:
+      logolight.png -> logo-light.webp  (dark mark for cream / light UI)
+      logodark.png  -> logo-dark.webp   (white mark for dark UI)
+      mainlogo.png  -> logo-color.webp  (gradient mark for accents)
+
+    Black canvas is removed via edge flood-fill so charcoal ink survives.
+    """
+    from collections import deque
+
     logo_dir = os.path.join(ROOT, "Logo")
     mapping = {
-        "ChatGPT Image Aug 22, 2026, 11_27_37 PM.png": "logo-light.webp",
-        "ChatGPT Image Aug 22, 2026, 11_27_42 PM.png": "logo-dark.webp",
-        "ChatGPT Image Aug 22, 2026, 11_27_51 PM.png": "logo-color.webp",
+        "logolight.png": ("logo-light.webp", 400, 40),
+        "logodark.png": ("logo-dark.webp", 400, 22),
+        "mainlogo.png": ("logo-color.webp", 480, 22),
     }
-    for src_name, dest_name in mapping.items():
+
+    def flood_key_black(img, thresh):
+        img = img.convert("RGBA")
+        w, h = img.size
+        px = img.load()
+
+        def is_bg(x, y):
+            r, g, b, a = px[x, y]
+            return a > 0 and r <= thresh and g <= thresh and b <= thresh
+
+        seen = [[False] * w for _ in range(h)]
+        q = deque()
+        seeds = [(0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)]
+        step_x = max(1, w // 40)
+        step_y = max(1, h // 40)
+        for x in range(0, w, step_x):
+            seeds.extend([(x, 0), (x, h - 1)])
+        for y in range(0, h, step_y):
+            seeds.extend([(0, y), (w - 1, y)])
+        for x, y in seeds:
+            if 0 <= x < w and 0 <= y < h and not seen[y][x] and is_bg(x, y):
+                q.append((x, y))
+                seen[y][x] = True
+        while q:
+            x, y = q.popleft()
+            r, g, b, a = px[x, y]
+            px[x, y] = (r, g, b, 0)
+            for nx, ny in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)):
+                if 0 <= nx < w and 0 <= ny < h and not seen[ny][nx] and is_bg(nx, ny):
+                    seen[ny][nx] = True
+                    q.append((nx, ny))
+        return img
+
+    for src_name, (dest_name, max_w, thresh) in mapping.items():
         src = os.path.join(logo_dir, src_name)
         if not os.path.isfile(src):
             print("logo missing", src_name)
             continue
-        img = Image.open(src).convert("RGBA")
-        px = img.load()
-        w, h = img.size
-        for y in range(h):
-            for x in range(w):
-                r, g, b, a = px[x, y]
-                if r < 36 and g < 36 and b < 36:
-                    px[x, y] = (r, g, b, 0)
+        img = flood_key_black(Image.open(src), thresh)
         bbox = img.getbbox()
         if bbox:
-            img = img.crop(bbox)
-        max_w = 360 if "color" in dest_name else 300
+            pad = 6
+            left = max(0, bbox[0] - pad)
+            top = max(0, bbox[1] - pad)
+            right = min(img.width, bbox[2] + pad)
+            bottom = min(img.height, bbox[3] + pad)
+            img = img.crop((left, top, right, bottom))
         if img.width > max_w:
             nh = round(img.height * max_w / img.width)
             img = img.resize((max_w, nh), Image.LANCZOS)
         dest = out_path("brand", dest_name)
-        img.save(dest, "WEBP", quality=90, method=6)
+        img.save(dest, "WEBP", quality=95, method=6)
         print("logo", dest_name, img.width, "x", img.height)
 
 

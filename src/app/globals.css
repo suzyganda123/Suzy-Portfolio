@@ -119,33 +119,34 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
 }
 
-/* Nav / light chrome */
+/* Nav / light chrome — true glass on cream */
 .glass {
-  background: rgb(255 253 252 / 0.72);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgb(255 255 255 / 0.65);
+  background: rgb(255 253 252 / 0.55);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgb(255 255 255 / 0.72);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.7),
-    0 1px 2px rgb(0 0 0 / 0.04),
-    0 16px 44px rgb(23 23 23 / 0.1);
+    inset 0 1px 0 rgb(255 255 255 / 0.75),
+    0 1px 2px rgb(23 23 23 / 0.03),
+    0 12px 36px rgb(23 23 23 / 0.08);
 }
 
-/* Hero floats + nav pill when scrolled */
+/* Hero floats */
 .glass-panel {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgb(255 255 255 / 0.78), rgb(255 253 252 / 0.58)),
-    rgb(255 253 252 / 0.55);
-  backdrop-filter: blur(24px) saturate(185%) contrast(1.04);
-  -webkit-backdrop-filter: blur(24px) saturate(185%) contrast(1.04);
-  border: 1px solid rgb(255 255 255 / 0.72);
+    linear-gradient(145deg, rgb(255 255 255 / 0.72), rgb(255 253 252 / 0.48)),
+    rgb(255 253 252 / 0.42);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgb(255 255 255 / 0.78);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.85),
-    inset 0 -1px 0 rgb(255 255 255 / 0.18),
-    var(--shadow-glass);
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    inset 0 -1px 0 rgb(255 255 255 / 0.12),
+    0 2px 4px rgb(23 23 23 / 0.03),
+    0 18px 48px rgb(23 23 23 / 0.1);
 }
 
 .glass-panel::before {
@@ -155,8 +156,8 @@ body {
   border-radius: inherit;
   pointer-events: none;
   background:
-    radial-gradient(circle at 18% 0%, rgb(255 255 255 / 0.55), transparent 38%),
-    linear-gradient(90deg, rgb(255 255 255 / 0.16), transparent 42%, rgb(255 255 255 / 0.1));
+    radial-gradient(circle at 16% 0%, rgb(255 255 255 / 0.5), transparent 36%),
+    linear-gradient(105deg, rgb(255 255 255 / 0.14), transparent 40%, rgb(255 255 255 / 0.08));
 }
 
 /* Content cards site-wide */
@@ -165,14 +166,15 @@ body {
   isolation: isolate;
   overflow: hidden;
   background:
-    linear-gradient(145deg, rgb(255 255 255 / 0.86), rgb(255 253 252 / 0.68)),
-    rgb(255 253 252 / 0.62);
-  backdrop-filter: blur(20px) saturate(175%);
-  -webkit-backdrop-filter: blur(20px) saturate(175%);
-  border: 1px solid rgb(255 255 255 / 0.7);
+    linear-gradient(150deg, rgb(255 255 255 / 0.82), rgb(255 253 252 / 0.62)),
+    rgb(255 253 252 / 0.58);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  border: 1px solid rgb(255 255 255 / 0.75);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.8),
-    var(--shadow-soft);
+    inset 0 1px 0 rgb(255 255 255 / 0.85),
+    0 1px 2px rgb(23 23 23 / 0.03),
+    0 14px 40px rgb(23 23 23 / 0.07);
 }
 
 .glass-card::before {
@@ -181,7 +183,7 @@ body {
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  background: radial-gradient(circle at 20% 0%, rgb(255 255 255 / 0.45), transparent 40%);
+  background: radial-gradient(circle at 18% 0%, rgb(255 255 255 / 0.4), transparent 42%);
 }
 
 /* Double-bezel (physical tray) */

@@ -7,7 +7,7 @@ export function SiteFooter() {
     <footer className="hairline-t bg-bg/80">
       <Container className="flex flex-col gap-10 py-12 md:flex-row md:items-end md:justify-between">
         <div>
-          <BrandLogo variant="light" className="h-7 w-auto" />
+          <BrandLogo variant="light" className="h-8 w-auto" />
           <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-muted">
             Digital marketing, campaigns, and marketing operations. Strategy, creative, and systems in one person.
           </p>

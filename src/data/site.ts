@@ -10,8 +10,11 @@ export const site = {
   cvUrl: "/assets/Suzette-Sun-CV.pdf",
   url: "https://suzettesun.com",
   logos: {
+    /** Dark mark for cream / light surfaces (`logolight.png`) */
     light: "/assets/brand/logo-light.webp",
+    /** White mark for dark surfaces (`logodark.png`) */
     dark: "/assets/brand/logo-dark.webp",
+    /** Gradient mark for accents (`mainlogo.png`) */
     color: "/assets/brand/logo-color.webp",
   },
 } as const;

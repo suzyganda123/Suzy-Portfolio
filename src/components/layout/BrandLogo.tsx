@@ -2,15 +2,16 @@ import Image from "next/image";
 import { site } from "@/data/site";
 
 type BrandLogoProps = {
+  /** light = dark mark on cream; dark = white mark on dark UI; color = gradient mark */
   variant?: "light" | "dark" | "color";
   className?: string;
   priority?: boolean;
 };
 
 const sizes = {
-  light: { width: 168, height: 28 },
-  dark: { width: 168, height: 28 },
-  color: { width: 188, height: 32 },
+  light: { width: 400, height: 88 },
+  dark: { width: 400, height: 123 },
+  color: { width: 480, height: 148 },
 } as const;
 
 export function BrandLogo({ variant = "light", className = "h-7 w-auto", priority }: BrandLogoProps) {
@@ -25,6 +26,7 @@ export function BrandLogo({ variant = "light", className = "h-7 w-auto", priorit
       alt={site.name}
       className={className}
       priority={priority}
+      sizes="180px"
     />
   );
 }

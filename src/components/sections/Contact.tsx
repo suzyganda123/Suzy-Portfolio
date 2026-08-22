@@ -1,5 +1,6 @@
 import { EnvelopeSimple, MapPin, Phone } from "@phosphor-icons/react/dist/ssr";
 import { site } from "@/data/site";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
 import { Reveal } from "@/components/motion/Reveal";
@@ -10,7 +11,8 @@ export function Contact() {
       <Container>
         <Reveal className="mx-auto max-w-[820px]">
           <div className="glass-panel rounded-3xl px-6 py-12 text-center md:px-14 md:py-16">
-            <p className="eyebrow">Contact</p>
+            <BrandLogo variant="color" className="mx-auto h-9 w-auto md:h-10" />
+            <p className="eyebrow mt-8">Contact</p>
             <h2 className="mt-6 text-[clamp(2.5rem,6vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
               Let&apos;s build your next <span className="serif-accent">campaign.</span>
             </h2>
