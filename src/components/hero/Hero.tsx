@@ -15,7 +15,6 @@ import { Chip } from "@/components/ui/Chip";
 import { Container } from "@/components/layout/Container";
 import { LaptopMockup } from "./LaptopMockup";
 import { FeaturedProjectCard } from "./FeaturedProjectCard";
-import { ToolsPanel } from "./ToolsPanel";
 import { HeroProofStrip } from "./HeroProofStrip";
 import { HeroQuoteCard } from "./HeroQuoteCard";
 import { ServicesDock } from "./ServicesDock";
@@ -50,7 +49,6 @@ export function Hero() {
   const laptopRotateX = useTransform(sy, [-0.5, 0.5], [0.9, -0.9]);
   const cardX = useTransform(sx, [-0.5, 0.5], [-5, 5]);
   const cardY = useTransform(sy, [-0.5, 0.5], [-4, 4]);
-  const toolsY = useTransform(sy, [-0.5, 0.5], [3, -3]);
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (reduce || !window.matchMedia("(pointer: fine)").matches || !sceneRef.current) return;
@@ -180,16 +178,6 @@ export function Hero() {
                 className="relative z-[5] mx-auto mt-6 w-full max-w-[280px] lg:absolute lg:right-[-2%] lg:top-[16%] lg:mt-0 lg:w-[31%] lg:max-w-[268px] xl:right-[1%] xl:top-[14%]"
               >
                 <FeaturedProjectCard />
-              </motion.div>
-
-              <motion.div
-                initial={reduce ? false : { opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.46, ease: EASE }}
-                style={reduce ? undefined : { y: toolsY }}
-                className="relative z-[4] mx-auto mt-4 w-full max-w-[420px] lg:absolute lg:bottom-[22%] lg:left-[18%] lg:mt-0 lg:w-[48%] lg:max-w-none xl:left-[20%] xl:w-[44%]"
-              >
-                <ToolsPanel />
               </motion.div>
             </motion.div>
           </div>
