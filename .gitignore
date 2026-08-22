@@ -1,0 +1,20 @@
+node_modules/
+.next/
+out/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# secrets / local env
+.env
+.env.*
+!.env.example
+
+# local analysis / QA artifacts
+.analysis/
+.shots/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,100 @@
+[
+  {
+    "id": "suzette-headshot.webp",
+    "kind": "photo",
+    "src": "/assets/photos/suzette-headshot.webp",
+    "width": 900,
+    "height": 1350
+  },
+  {
+    "id": "suzette-casual.webp",
+    "kind": "photo",
+    "src": "/assets/photos/suzette-casual.webp",
+    "width": 1200,
+    "height": 1200
+  },
+  {
+    "id": "suzette-editorial.webp",
+    "kind": "photo",
+    "src": "/assets/photos/suzette-editorial.webp",
+    "width": 1200,
+    "height": 1200
+  },
+  {
+    "id": "social-whats-new.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-whats-new.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "social-struggling.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-struggling.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "social-safety-shift.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-safety-shift.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "social-compliance-struggle.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-compliance-struggle.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "social-hidden-costs.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-hidden-costs.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "social-new-course.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-new-course.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "social-safety-shift-dark.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-safety-shift-dark.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "social-team-compliance.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-team-compliance.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "social-hidden-costs-alt.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-hidden-costs-alt.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "social-cii-vesak.webp",
+    "kind": "social",
+    "src": "/assets/work/social/social-cii-vesak.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "hero-workspace.webp",
+    "kind": "hero",
+    "src": "/assets/hero/hero-workspace.webp",
+    "width": 1476,
+    "height": 995
+  }
+]

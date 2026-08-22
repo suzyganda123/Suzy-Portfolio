@@ -1,0 +1,255 @@
+"""Asset pipeline for Suzette Sun portfolio.
+
+Reads source assets from 'Suzy Assets/', writes production WebP/SVG/PDF
+files to 'public/assets/' and a machine-readable manifest to
+'src/data/assets-manifest.json'.
+
+Idempotent: re-running overwrites outputs. Originals are never touched.
+"""
+
+import json
+import os
+import shutil
+import urllib.request
+
+import pypdfium2 as pdfium
+from PIL import Image
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC = os.path.join(ROOT, "Suzy Assets")
+OUT = os.path.join(ROOT, "public", "assets")
+MANIFEST = os.path.join(ROOT, "src", "data", "assets-manifest.json")
+
+WEBP_Q = 82
+
+manifest = []
+
+
+def out_path(*parts):
+    p = os.path.join(OUT, *parts)
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    return p
+
+
+def save_webp(img, dest, max_w):
+    if img.width > max_w:
+        h = round(img.height * max_w / img.width)
+        img = img.resize((max_w, h), Image.LANCZOS)
+    if img.mode != "RGB":
+        img = img.convert("RGB")
+    img.save(dest, "WEBP", quality=WEBP_Q, method=6)
+    rel = "/" + os.path.relpath(dest, os.path.join(ROOT, "public")).replace("\\", "/")
+    return {"src": rel, "width": img.width, "height": img.height}
+
+
+def photo(src_name, dest_name, max_w, folder="Profile Photos"):
+    src = os.path.join(SRC, folder, src_name)
+    img = Image.open(src)
+    meta = save_webp(img, out_path("photos", dest_name), max_w)
+    manifest.append({"id": dest_name, "kind": "photo", **meta})
+    print("photo", dest_name, meta["width"], "x", meta["height"])
+
+
+def pdf_pages(src_path, dest_name, scale=2.0, pages=(0,), folder=""):
+    full = os.path.join(SRC, folder, src_path) if folder else src_path
+    doc = pdfium.PdfDocument(full)
+    results = []
+    for i in pages:
+        if i >= len(doc):
+            break
+        img = doc[i].render(scale=scale).to_pil()
+        suffix = f"-p{i + 1}" if len(pages) > 1 else ""
+        dest = out_path("work", f"{dest_name}{suffix}.webp")
+        meta = save_webp(img, dest, 1400)
+        results.append(meta)
+        print("pdf", dest_name, i + 1, meta["width"], "x", meta["height"])
+    doc.close()
+    return results
+
+
+def social(src_name, dest_name, max_w=1080):
+    src = os.path.join(SRC, "Social Posts", src_name)
+    img = Image.open(src)
+    meta = save_webp(img, out_path("work", "social", dest_name), max_w)
+    manifest.append({"id": dest_name, "kind": "social", **meta})
+    print("social", dest_name, meta["width"], "x", meta["height"])
+
+
+ICONS = {
+    "mailchimp": "Mailchimp",
+    "hubspot": "HubSpot",
+    "gohighlevel": "GoHighLevel",
+    "googleanalytics": "Google Analytics",
+    "googletagmanager": "Google Tag Manager",
+    "canva": "Canva",
+    "meta": "Meta",
+    "wordpress": "WordPress",
+    "figma": "Figma",
+}
+
+
+def process_hero_asset():
+    """Laptop hero mockup from project root — keyed to transparent for cream bg."""
+    src = os.path.join(ROOT, "heroasset.png")
+    if not os.path.isfile(src):
+        print("hero asset missing heroasset.png")
+        return
+    img = Image.open(src).convert("RGBA")
+    px = img.load()
+    w, h = img.size
+    for y in range(h):
+        for x in range(w):
+            r, g, b, a = px[x, y]
+            if r < 28 and g < 28 and b < 28:
+                px[x, y] = (r, g, b, 0)
+    bbox = img.getbbox()
+    if bbox:
+        img = img.crop(bbox)
+    max_w = 1600
+    if img.width > max_w:
+        nh = round(img.height * max_w / img.width)
+        img = img.resize((max_w, nh), Image.LANCZOS)
+    dest = out_path("hero", "hero-workspace.webp")
+    img.save(dest, "WEBP", quality=90, method=6)
+    rel = "/" + os.path.relpath(dest, os.path.join(ROOT, "public")).replace("\\", "/")
+    manifest.append(
+        {
+            "id": "hero-workspace.webp",
+            "kind": "hero",
+            "src": rel,
+            "width": img.width,
+            "height": img.height,
+        }
+    )
+    print("hero", "hero-workspace.webp", img.width, "x", img.height)
+
+
+def process_logos():
+    """Brand marks from Logo/ — light, dark, and color variants with alpha."""
+    logo_dir = os.path.join(ROOT, "Logo")
+    mapping = {
+        "ChatGPT Image Aug 22, 2026, 11_27_37 PM.png": "logo-light.webp",
+        "ChatGPT Image Aug 22, 2026, 11_27_42 PM.png": "logo-dark.webp",
+        "ChatGPT Image Aug 22, 2026, 11_27_51 PM.png": "logo-color.webp",
+    }
+    for src_name, dest_name in mapping.items():
+        src = os.path.join(logo_dir, src_name)
+        if not os.path.isfile(src):
+            print("logo missing", src_name)
+            continue
+        img = Image.open(src).convert("RGBA")
+        px = img.load()
+        w, h = img.size
+        for y in range(h):
+            for x in range(w):
+                r, g, b, a = px[x, y]
+                if r < 36 and g < 36 and b < 36:
+                    px[x, y] = (r, g, b, 0)
+        bbox = img.getbbox()
+        if bbox:
+            img = img.crop(bbox)
+        max_w = 360 if "color" in dest_name else 300
+        if img.width > max_w:
+            nh = round(img.height * max_w / img.width)
+            img = img.resize((max_w, nh), Image.LANCZOS)
+        dest = out_path("brand", dest_name)
+        img.save(dest, "WEBP", quality=90, method=6)
+        print("logo", dest_name, img.width, "x", img.height)
+
+
+def fetch_icons():
+    for slug in ICONS:
+        dest = out_path("icons", f"{slug}.svg")
+        url = f"https://cdn.simpleicons.org/{slug}"
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=20) as r:
+                data = r.read()
+            if b"<svg" not in data:
+                raise ValueError("not an svg")
+            with open(dest, "wb") as f:
+                f.write(data)
+            print("icon", slug, len(data), "bytes")
+        except Exception as e:
+            print("icon FAIL", slug, e)
+
+
+def main():
+    # Portraits (approved photos only)
+    photo("ChatGPT Image Aug 22, 2026, 04_00_45 PM.png", "suzette-headshot.webp", 900)
+    photo("ChatGPT Image Aug 22, 2026, 04_00_56 PM.png", "suzette-casual.webp", 1200)
+    photo("ChatGPT Image Aug 22, 2026, 04_01_08 PM.png", "suzette-editorial.webp", 1200)
+
+    # Email campaigns (Atlantic Training)
+    pdf_pages("C&C Final Draft August 20, 2026 (1).pdf", "email-coffee-compliance", 2.0,
+              folder="Email Designs")
+    pdf_pages("Give your team the access they need to stay safe, compliant, and prepared, at no additional cost for 90 days. (2).pdf",
+              "email-course-access", 2.0, pages=(0,), folder="Email Designs")
+    pdf_pages("Sept Oct Promo (2).pdf", "email-fall-promo", 2.0, pages=(0,),
+              folder="Email Designs")
+
+    # Lead magnet covers (Atlantic Training)
+    guide_dir = os.path.join(SRC, "Guides, Checklists, and other Lead Magnets")
+    for f in sorted(os.listdir(guide_dir)):
+        if not f.lower().endswith(".pdf"):
+            continue
+        slug = (
+            f.lower().replace(".pdf", "")
+            .replace(" ", "-").replace("_", "-").replace(",", "")
+        )
+        slug = "".join(c for c in slug if c.isalnum() or c == "-")[:40].strip("-")
+        pdf_pages(os.path.join(guide_dir, f), f"guide-{slug}", 1.6, pages=(0,))
+
+    # Social posts (curated)
+    social_map = {
+        "8.png": "social-whats-new.webp",
+        "32.png": "social-struggling.webp",
+        "102.png": "social-safety-shift.webp",
+        "150.png": "social-compliance-struggle.webp",
+        "185.png": "social-hidden-costs.webp",
+        "194.png": "social-new-course.webp",
+        "126.png": "social-safety-shift-dark.webp",
+        "144.png": "social-team-compliance.webp",
+        "160.png": "social-hidden-costs-alt.webp",
+        "vesak day.png": "social-cii-vesak.webp",
+    }
+    for src_name, dest_name in social_map.items():
+        social(src_name, dest_name)
+
+    # Certifications
+    cert_dir = os.path.join(SRC, "Certifications")
+    for f in sorted(os.listdir(cert_dir)):
+        low = f.lower()
+        slug = (
+            os.path.splitext(low)[0].replace(" ", "-").replace("_", "-")
+        )
+        slug = "".join(c for c in slug if c.isalnum() or c == "-")[:44].strip("-")
+        if low.endswith(".pdf"):
+            full = os.path.join(cert_dir, f)
+            doc = pdfium.PdfDocument(full)
+            img = doc[0].render(scale=1.6).to_pil()
+            meta = save_webp(img, out_path("certs", f"cert-{slug}.webp"), 1000)
+            doc.close()
+            print("cert", slug, meta["width"], "x", meta["height"])
+        elif low.endswith((".jpg", ".jpeg", ".png")):
+            img = Image.open(os.path.join(cert_dir, f))
+            meta = save_webp(img, out_path("certs", f"cert-{slug}.webp"), 1000)
+            print("cert", slug, meta["width"], "x", meta["height"])
+
+    # CV for download
+    cv_dest = out_path("", "Suzette-Sun-CV.pdf")
+    shutil.copyfile(os.path.join(SRC, "CVs", "Suzette Elyza Sun CV.pdf"), cv_dest)
+    print("cv copied")
+
+    process_hero_asset()
+    process_logos()
+    fetch_icons()
+
+    os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
+    with open(MANIFEST, "w") as f:
+        json.dump(manifest, f, indent=2)
+    print("manifest:", len(manifest), "entries")
+
+
+if __name__ == "__main__":
+    main()
