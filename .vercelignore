@@ -1,0 +1,12 @@
+.shots
+.analysis
+.next
+node_modules
+.git
+Suzy Assets
+Logo
+heroasset.png
+heropage.jpg
+*.md
+.env
+.env.*

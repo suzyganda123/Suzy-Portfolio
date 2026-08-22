@@ -7,14 +7,16 @@ const geist = Geist({
   subsets: ["latin"],
   variable: "--font-geist",
   display: "swap",
+  preload: true,
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  style: ["italic", "normal"],
-  weight: ["400", "500", "600"],
+  style: ["italic"],
+  weight: ["500"],
   variable: "--font-playfair",
   display: "swap",
+  preload: true,
 });
 
 const description =
@@ -27,9 +29,26 @@ export const metadata: Metadata = {
     template: "%s | Suzette Sun",
   },
   description,
+  keywords: [
+    "Suzette Sun",
+    "digital marketing",
+    "email marketing",
+    "campaigns",
+    "marketing operations",
+    "CRM automation",
+    "Mailchimp",
+    "HubSpot",
+    "virtual assistant",
+    "Philippines remote marketer",
+  ],
+  authors: [{ name: site.fullName, url: site.url }],
+  creator: site.fullName,
+  publisher: site.fullName,
+  category: "marketing",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
+    locale: "en_PH",
     url: site.url,
     siteName: "Suzette Sun",
     title: "Suzette Sun | Digital Marketing, Campaigns & Marketing Operations",
@@ -42,7 +61,17 @@ export const metadata: Metadata = {
     description,
     images: ["/assets/og.jpg"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -71,6 +100,7 @@ const personJsonLd = {
   description,
   email: `mailto:${site.email}`,
   telephone: site.phone,
+  image: `${site.url}/assets/photos/suzette-headshot.webp`,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Dasmariñas",
@@ -94,6 +124,19 @@ const personJsonLd = {
   url: site.url,
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Suzette Sun",
+  url: site.url,
+  description,
+  inLanguage: "en",
+  publisher: {
+    "@type": "Person",
+    name: site.fullName,
+  },
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geist.variable} ${playfair.variable}`}>
@@ -101,6 +144,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         {children}
       </body>
