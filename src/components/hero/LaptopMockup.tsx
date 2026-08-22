@@ -3,43 +3,37 @@
 import Image from "next/image";
 import { motion, type MotionStyle } from "motion/react";
 
+/** Native crop of heroasset.png after black-key (lossless WebP). */
 const HERO = {
   src: "/assets/hero/hero-workspace.webp",
   width: 1476,
   height: 995,
 } as const;
 
-/** Hero workspace: approved laptop mockup resting on a stone plinth. */
+/** Laptop from heroasset.png, seated on a stone plinth like heropage.jpg. */
 export function LaptopMockup({ style }: { style?: MotionStyle }) {
   return (
-    <div style={{ perspective: "1600px" }} className="relative mx-auto w-full max-w-[640px] lg:max-w-none">
-      <motion.div style={style} className="[transform-style:preserve-3d]">
-        <div style={{ transform: "rotateY(6deg) rotateX(1.5deg)", transformStyle: "preserve-3d" }}>
-          <div className="relative z-[1] w-full">
-            <Image
-              src={HERO.src}
-              width={HERO.width}
-              height={HERO.height}
-              alt="Portfolio preview on MacBook showing campaign work, featured project, and tools"
-              className="h-auto w-full drop-shadow-[0_32px_64px_rgb(23_23_23/0.22)]"
-              priority
-              sizes="(max-width: 768px) 92vw, (max-width: 1200px) 54vw, 640px"
-            />
-          </div>
-
-          {/* Stone pedestal under the laptop base */}
-          <div
-            className="relative z-0 mx-auto -mt-3 w-[76%] rounded-[28px] bg-gradient-to-b from-[#d8d2c8] via-[#c8c0b4] to-[#b8afa2] shadow-[0_28px_60px_rgb(23_23_23/0.16)]"
-            aria-hidden
-          >
-            <div className="absolute inset-x-[8%] top-0 h-[3px] rounded-full bg-white/35" />
-            <div className="absolute inset-0 rounded-[28px] opacity-30 [background-image:radial-gradient(circle_at_30%_20%,rgb(255_255_255/0.5),transparent_45%)]" />
-            <div className="h-[26px]" />
-          </div>
-        </div>
+    <div className="relative mx-auto w-full">
+      <div
+        className="stone pointer-events-none absolute bottom-[6%] left-[11%] right-[11%] z-0 h-[22%] rounded-[32px]"
+        aria-hidden
+      />
+      <motion.div
+        style={{ perspective: "1800px", ...style }}
+        className="relative z-[1] [transform-style:preserve-3d]"
+      >
+        <Image
+          src={HERO.src}
+          width={HERO.width}
+          height={HERO.height}
+          alt="Suzette Sun portfolio shown on a laptop, with the featured campaign and marketing tool stack"
+          className="relative z-[1] h-auto w-full drop-shadow-[0_28px_56px_rgb(23_23_23/0.22)]"
+          priority
+          quality={100}
+          sizes="(max-width: 767px) 96vw, (max-width: 1279px) 62vw, 920px"
+        />
       </motion.div>
-
-      <div className="mx-auto mt-3 h-8 w-[62%] rounded-[100%] bg-ink/12 blur-2xl" aria-hidden />
+      <div className="mx-auto -mt-1 h-9 w-[58%] rounded-full bg-ink/14 blur-2xl" aria-hidden />
     </div>
   );
 }

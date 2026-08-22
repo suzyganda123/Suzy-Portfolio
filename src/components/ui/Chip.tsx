@@ -8,10 +8,26 @@ const dotColors: Record<string, string> = {
   lime: "bg-lime",
 };
 
-export function Chip({ label, color }: { label: string; color?: string }) {
+type ChipProps = {
+  label: string;
+  color?: string;
+  /** `compact` matches the hero's small tracked caps. */
+  size?: "default" | "compact";
+};
+
+export function Chip({ label, color, size = "default" }: ChipProps) {
+  const compact = size === "compact";
   return (
-    <span className="glass-card inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] font-medium text-ink">
-      {color ? <span className={`size-1.5 rounded-full ${dotColors[color] ?? "bg-ink"}`} aria-hidden /> : null}
+    <span
+      className={`glass-card inline-flex items-center rounded-full text-ink ${
+        compact
+          ? "gap-2 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.11em]"
+          : "gap-2 px-3.5 py-1.5 text-[13px] font-medium"
+      }`}
+    >
+      {color ? (
+        <span className={`size-2 rounded-[3px] ${dotColors[color] ?? "bg-ink"}`} aria-hidden />
+      ) : null}
       {label}
     </span>
   );

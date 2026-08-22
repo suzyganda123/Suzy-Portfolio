@@ -1,34 +1,34 @@
 import {
-  ChartLineUp,
+  ChartPieSlice,
   Megaphone,
-  Palette,
+  PenNib,
   ShareNetwork,
   Sparkle,
-  UserCircle,
+  Stack,
 } from "@phosphor-icons/react/dist/ssr";
 
 const services = [
-  { label: "Branding", icon: Palette, tint: "from-pink/20 to-coral/10 text-pink" },
-  { label: "Social", icon: ShareNetwork, tint: "from-orange/20 to-coral/10 text-orange" },
-  { label: "Content", icon: Sparkle, tint: "from-violet/20 to-pink/10 text-violet" },
-  { label: "Campaigns", icon: Megaphone, tint: "from-coral/20 to-orange/10 text-coral" },
-  { label: "Analytics", icon: ChartLineUp, tint: "from-blue/20 to-cyan/10 text-blue" },
-  { label: "Virtual Assist", icon: UserCircle, tint: "from-cyan/20 to-blue/10 text-cyan" },
+  { label: "Branding", icon: PenNib, tint: "from-pink/30 to-coral/15 text-pink" },
+  { label: "Social Media", icon: ShareNetwork, tint: "from-orange/30 to-coral/15 text-orange" },
+  { label: "Content", icon: Stack, tint: "from-violet/30 to-pink/12 text-violet" },
+  { label: "Campaigns", icon: Megaphone, tint: "from-lime/30 to-cyan/12 text-lime" },
+  { label: "Analytics", icon: ChartPieSlice, tint: "from-blue/30 to-cyan/15 text-blue" },
+  { label: "Virtual Assist", icon: Sparkle, tint: "from-ink/12 to-ink/5 text-ink" },
 ] as const;
 
 export function ServicesDock() {
   return (
-    <div className="glass-panel rounded-2xl px-3 py-2.5">
-      <ul className="flex items-center justify-between gap-1.5 sm:gap-2" aria-label="Core services">
+    <div className="glass-panel rounded-2xl px-4 py-5 md:px-6">
+      <ul className="flex items-start justify-between gap-2 sm:gap-4" aria-label="Core services">
         {services.map(({ label, icon: Icon, tint }) => (
-          <li key={label} className="flex flex-col items-center gap-1">
+          <li key={label} className="flex min-w-0 flex-col items-center gap-2">
             <span
-              className={`flex size-9 items-center justify-center rounded-xl bg-gradient-to-br ${tint} sm:size-10`}
+              className={`flex size-11 items-center justify-center rounded-[14px] border border-white/70 bg-gradient-to-br ${tint} shadow-[inset_0_1px_0_rgb(255_255_255/0.8)]`}
               aria-hidden
             >
-              <Icon size={18} weight="duotone" />
+              <Icon size={20} weight="duotone" />
             </span>
-            <span className="hidden text-[9px] font-semibold uppercase tracking-[0.08em] text-muted sm:block">
+            <span className="text-center text-[9px] font-medium leading-tight tracking-[0.02em] text-muted">
               {label}
             </span>
           </li>

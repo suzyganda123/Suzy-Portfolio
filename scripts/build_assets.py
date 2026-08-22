@@ -13,7 +13,7 @@ import shutil
 import urllib.request
 
 import pypdfium2 as pdfium
-from PIL import Image
+from PIL import Image, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "Suzy Assets")
@@ -100,17 +100,16 @@ def process_hero_asset():
     for y in range(h):
         for x in range(w):
             r, g, b, a = px[x, y]
-            if r < 28 and g < 28 and b < 28:
+            if r < 34 and g < 34 and b < 34:
                 px[x, y] = (r, g, b, 0)
+    # Feather the cut so the keyed edge does not read as a dark fringe on cream.
+    img.putalpha(img.getchannel("A").filter(ImageFilter.GaussianBlur(0.7)))
     bbox = img.getbbox()
     if bbox:
         img = img.crop(bbox)
-    max_w = 1600
-    if img.width > max_w:
-        nh = round(img.height * max_w / img.width)
-        img = img.resize((max_w, nh), Image.LANCZOS)
+    # Keep native resolution: the source is the ceiling, upscaling would only invent detail.
     dest = out_path("hero", "hero-workspace.webp")
-    img.save(dest, "WEBP", quality=90, method=6)
+    img.save(dest, "WEBP", lossless=True, quality=100, method=6)
     rel = "/" + os.path.relpath(dest, os.path.join(ROOT, "public")).replace("\\", "/")
     manifest.append(
         {
