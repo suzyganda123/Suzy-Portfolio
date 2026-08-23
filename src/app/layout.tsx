@@ -103,7 +103,7 @@ const personJsonLd = {
   image: `${site.url}/assets/photos/suzette-headshot.webp`,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Dasmariñas",
+    addressLocality: "Imus",
     addressRegion: "Cavite",
     addressCountry: "PH",
   },
@@ -119,8 +119,9 @@ const personJsonLd = {
   ],
   alumniOf: {
     "@type": "CollegeOrUniversity",
-    name: "Polytechnic University of the Philippines",
+    name: "Pamantasan ng Lungsod ng Maynila",
   },
+  sameAs: ["https://www.linkedin.com/in/suzettesun"],
   url: site.url,
 };
 

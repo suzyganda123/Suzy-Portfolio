@@ -17,9 +17,10 @@ export function Contact() {
               Let&apos;s build your next <span className="serif-accent">campaign.</span>
             </h2>
             <p className="mx-auto mt-6 max-w-[52ch] text-[17px] leading-relaxed text-muted">
-              I&apos;m open to new opportunities in digital marketing, campaigns, and marketing operations.
-              If you need someone who can design the work and run the system behind it, let&apos;s talk.
+              Open to roles in digital marketing, campaigns, and marketing operations. If you need someone
+              who can design the work and run the system behind it, let&apos;s talk.
             </p>
+            <p className="mt-3 text-[13px] font-medium tracking-wide text-muted/80">{site.tagline}</p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Button href={`mailto:${site.email}`} arrow="right" ariaLabel="Email Suzette Sun">
                 Let&apos;s Connect

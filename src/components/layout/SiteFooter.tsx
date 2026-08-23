@@ -9,8 +9,9 @@ export function SiteFooter() {
         <div>
           <BrandLogo variant="light" className="h-8 w-auto" />
           <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-muted">
-            Digital marketing, campaigns, and marketing operations. Strategy, creative, and systems in one person.
+            {site.positioning}
           </p>
+          <p className="mt-2 text-[12px] font-medium tracking-wide text-muted/70">{site.tagline}</p>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
           {nav.map((item) => (

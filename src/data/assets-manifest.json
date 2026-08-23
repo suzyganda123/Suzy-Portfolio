@@ -96,5 +96,82 @@
     "src": "/assets/hero/hero-workspace.webp",
     "width": 1476,
     "height": 995
+  },
+  {
+    "id": "guide-beat-the-heat-field-safety-checklist.webp",
+    "kind": "work",
+    "src": "/assets/work/guide-beat-the-heat-field-safety-checklist.webp",
+    "width": 1400,
+    "height": 1751
+  },
+  {
+    "id": "guide-heat-stress-compliance-checklist.webp",
+    "kind": "work",
+    "src": "/assets/work/guide-heat-stress-compliance-checklist.webp",
+    "width": 1400,
+    "height": 1751
+  },
+  {
+    "id": "guide-workplace-violence-warning-signs-card.webp",
+    "kind": "work",
+    "src": "/assets/work/guide-workplace-violence-warning-signs-card.webp",
+    "width": 1400,
+    "height": 1083
+  },
+  {
+    "id": "guide-complete-emergency-action-plan-template.webp",
+    "kind": "work",
+    "src": "/assets/work/guide-complete-emergency-action-plan-template.webp",
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "id": "guide-eap-pre-season-audit-checklist-2.webp",
+    "kind": "work",
+    "src": "/assets/work/guide-eap-pre-season-audit-checklist-2.webp",
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "id": "guide-the-new-hire-safety-onboarding-checklist.webp",
+    "kind": "work",
+    "src": "/assets/work/guide-the-new-hire-safety-onboarding-checklist.webp",
+    "width": 1103,
+    "height": 1426
+  },
+  {
+    "id": "guide-the-safety-program-scorecard-2.webp",
+    "kind": "work",
+    "src": "/assets/work/guide-the-safety-program-scorecard-2.webp",
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "id": "email-back-to-school.webp",
+    "kind": "work",
+    "src": "/assets/work/email-back-to-school.webp",
+    "width": 951,
+    "height": 1654
+  },
+  {
+    "id": "email-back-to-school-p2.webp",
+    "kind": "work",
+    "src": "/assets/work/email-back-to-school-p2.webp",
+    "width": 1027,
+    "height": 1531
+  },
+  {
+    "id": "email-fall-promo.webp",
+    "kind": "work",
+    "src": "/assets/work/email-fall-promo.webp",
+    "width": 977,
+    "height": 1400
+  },
+  {
+    "id": "email-fall-promo-p2.webp",
+    "kind": "work",
+    "src": "/assets/work/email-fall-promo-p2.webp",
+    "width": 977,
+    "height": 1400
   }
 ]

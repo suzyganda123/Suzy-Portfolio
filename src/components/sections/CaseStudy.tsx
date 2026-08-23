@@ -15,7 +15,8 @@ export function CaseStudy() {
               <div className="p-7 md:p-12 lg:col-span-6 xl:col-span-5">
                 <p className="eyebrow">Case study</p>
                 <h2 className="mt-4 text-[clamp(1.9rem,3.2vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-ink">
-                  Coffee &amp; Compliance
+                  Coffee &amp;{" "}
+                  <span className="serif-accent gradient-word">Compliance</span>
                 </h2>
                 <p className="mt-3 text-[14px] font-medium text-muted">
                   {caseStudy.company}, {caseStudy.year}

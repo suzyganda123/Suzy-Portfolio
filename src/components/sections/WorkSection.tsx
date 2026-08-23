@@ -39,7 +39,7 @@ export function WorkSection() {
       <Container>
         <SectionIntro
           title="Selected work, real campaigns."
-          description="Email, web, social, and content projects from my time with Atlantic Training and Core Biz Hub. Every image below is actual shipped work."
+          description="Email systems, promo creatives, resource hubs, lead magnets, and social from Atlantic Training and Core Biz Hub. Every image is shipped work."
         />
 
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-12">
@@ -86,16 +86,36 @@ function FeaturedCard({
 
   const body = (
     <>
-      <div className={`zoom-frame relative ${tall ? "h-[300px] md:h-[420px]" : "h-[260px] md:h-[300px]"}`}>
-        <Image
-          src={img.src}
-          width={img.width}
-          height={img.height}
-          alt={img.alt}
-          className="h-full w-full object-cover object-top"
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
-        />
-      </div>
+      {project.images.length > 1 && !tall ? (
+        <div className={`grid grid-cols-2 gap-1.5 bg-bg/40 p-1.5 ${tall ? "" : ""}`}>
+          {project.images.slice(0, 2).map((im) => (
+            <div
+              key={im.src}
+              className={`zoom-frame relative ${tall ? "h-[300px] md:h-[420px]" : "h-[260px] md:h-[300px]"}`}
+            >
+              <Image
+                src={im.src}
+                width={im.width}
+                height={im.height}
+                alt={im.alt}
+                className="h-full w-full object-cover object-top"
+                sizes="(max-width: 768px) 50vw, 320px"
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={`zoom-frame relative ${tall ? "h-[300px] md:h-[420px]" : "h-[260px] md:h-[300px]"}`}>
+          <Image
+            src={img.src}
+            width={img.width}
+            height={img.height}
+            alt={img.alt}
+            className="h-full w-full object-cover object-top"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
+          />
+        </div>
+      )}
       <CardMeta project={project} external={external} linked={linked} />
     </>
   );
@@ -202,20 +222,40 @@ function WorkLinkList({ links }: { links: NonNullable<Project["workLinks"]> }) {
 }
 
 function ArchiveCard({ project }: { project: Project }) {
-  const img = project.images[0];
+  const imgs = project.images.slice(0, 4);
+  const primary = imgs[0];
+  const multi = imgs.length > 1;
+
   const inner = (
-    <div className="pressable group flex h-full gap-5 rounded-xl glass-card p-5 hover:shadow-lift">
-      <div className="zoom-frame relative hidden w-[120px] shrink-0 self-stretch rounded-md sm:block">
-        <Image
-          src={img.src}
-          width={img.width}
-          height={img.height}
-          alt={img.alt}
-          className="absolute h-full w-full object-cover object-top"
-          sizes="120px"
-        />
-      </div>
-      <div className="min-w-0">
+    <div className="pressable group flex h-full flex-col gap-5 rounded-xl glass-card p-5 hover:shadow-lift sm:flex-row">
+      {multi ? (
+        <div className="grid w-full shrink-0 grid-cols-2 gap-1.5 sm:w-[148px]">
+          {imgs.slice(0, 4).map((img) => (
+            <div key={img.src} className="zoom-frame relative aspect-square overflow-hidden rounded-md">
+              <Image
+                src={img.src}
+                width={img.width}
+                height={img.height}
+                alt={img.alt}
+                className="h-full w-full object-cover object-top"
+                sizes="74px"
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="zoom-frame relative hidden w-[120px] shrink-0 self-stretch rounded-md sm:block">
+          <Image
+            src={primary.src}
+            width={primary.width}
+            height={primary.height}
+            alt={primary.alt}
+            className="absolute h-full w-full object-cover object-top"
+            sizes="120px"
+          />
+        </div>
+      )}
+      <div className="min-w-0 flex-1">
         <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
           <span className={`size-1.5 rounded-full ${accentDot[project.accent]}`} aria-hidden />
           {project.category.slice(0, 2).map(categoryLabel).join(" & ")}

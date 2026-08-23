@@ -2,11 +2,13 @@ export const site = {
   name: "Suzette Sun",
   fullName: "Suzette Elyza S. Sun",
   role: "Digital Marketing | Campaigns | Marketing Operations",
-  email: "suzetteelyza@gmail.com",
+  email: "suzetteelyza2002@gmail.com",
   phone: "+63 956 379 9236",
-  location: "Dasmariñas, Cavite, Philippines",
+  location: "Imus, Cavite, Philippines",
+  linkedin: "https://www.linkedin.com/in/suzettesun",
   positioning:
-    "I help brands stand out, connect with the right audience, and grow through strategy, creativity, and data-driven marketing.",
+    "Multidisciplinary marketing professional who plans, builds, and runs email campaigns, CRM systems, content, and SEO, from brief to report.",
+  tagline: "Always learning. Always growing.",
   cvUrl: "/assets/Suzette-Sun-CV.pdf",
   url: "https://suzettesun.com",
   logos: {
@@ -47,4 +49,52 @@ export const servicesStrip = [
   "Analytics",
   "Campaign Operations",
   "Virtual Assistance",
+] as const;
+
+/** Core expertise columns from the CV, used in Services. */
+export const expertiseClusters = [
+  {
+    name: "Campaigns & Growth",
+    items: [
+      "Campaign strategy",
+      "Email marketing",
+      "Audience segmentation",
+      "A/B testing",
+      "Lead generation",
+      "Customer engagement",
+    ],
+  },
+  {
+    name: "Marketing Operations",
+    items: [
+      "CRM management",
+      "Marketing automation",
+      "Database management",
+      "Campaign workflows",
+      "UTM tracking",
+      "Reporting & analysis",
+    ],
+  },
+  {
+    name: "Content & Creative",
+    items: [
+      "Content strategy",
+      "Social media",
+      "Graphic design",
+      "Email design",
+      "Lead magnets",
+      "Landing pages",
+      "Website content",
+    ],
+  },
+  {
+    name: "Digital & SEO",
+    items: [
+      "SEO",
+      "YouTube optimization",
+      "Website management",
+      "Analytics",
+      "Conversion-focused content",
+    ],
+  },
 ] as const;

@@ -214,6 +214,37 @@ def fetch_icons():
             print("icon FAIL", slug, e)
 
 
+def process_png_guides_and_promos():
+    """PNG covers from repo root Guides/ and .analysis/ promo folders."""
+    jobs = [
+        (
+            os.path.join(ROOT, "Guides, Checklists, and other Lead Magnets", "BEAT THE HEAT Field Safety Checklist", "1.png"),
+            "guide-beat-the-heat-field-safety-checklist.webp",
+            1400,
+        ),
+        (
+            os.path.join(ROOT, "Guides, Checklists, and other Lead Magnets", "Heat Stress Compliance Checklist (1)", "1.png"),
+            "guide-heat-stress-compliance-checklist.webp",
+            1400,
+        ),
+        (
+            os.path.join(ROOT, "Guides, Checklists, and other Lead Magnets", "WORKPLACE VIOLENCE WARNING SIGNS & RESPONSE PROTOCOL CARD (3)", "1.png"),
+            "guide-workplace-violence-warning-signs-card.webp",
+            1400,
+        ),
+        (os.path.join(ROOT, ".analysis", "Back to School promo", "1.png"), "email-back-to-school.webp", 1200),
+        (os.path.join(ROOT, ".analysis", "Sept Oct Promo", "1.png"), "email-fall-promo.webp", 1200),
+    ]
+    for src, dest_name, max_w in jobs:
+        if not os.path.isfile(src):
+            print("png missing", dest_name)
+            continue
+        img = Image.open(src)
+        meta = save_webp(img, out_path("work", dest_name), max_w)
+        manifest.append({"id": dest_name, "kind": "work", **meta})
+        print("png", dest_name, meta["width"], "x", meta["height"])
+
+
 def main():
     # Portraits (approved photos only)
     photo("ChatGPT Image Aug 22, 2026, 04_00_45 PM.png", "suzette-headshot.webp", 900)
@@ -239,6 +270,8 @@ def main():
         )
         slug = "".join(c for c in slug if c.isalnum() or c == "-")[:40].strip("-")
         pdf_pages(os.path.join(guide_dir, f), f"guide-{slug}", 1.6, pages=(0,))
+
+    process_png_guides_and_promos()
 
     # Social posts (curated)
     social_map = {

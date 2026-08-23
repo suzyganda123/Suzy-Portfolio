@@ -20,7 +20,7 @@ export function HeroContactCard() {
         />
         <div className="min-w-0 flex-1 text-white">
           <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-white/85">
-            Based in Cavite, PH
+            Based in Imus, PH
           </p>
           <p className="mt-1 text-[14px] font-semibold leading-[1.25] tracking-tight">
             Let&apos;s build something amazing together.

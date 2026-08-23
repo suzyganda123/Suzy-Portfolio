@@ -150,20 +150,32 @@ export const projects: Project[] = [
     role: ["Email design", "Segmentation", "A/B testing", "Scheduling"],
     tools: ["Mailchimp", "HubSpot", "Canva"],
     summary:
-      "Recurring promotional and lifecycle emails, from seasonal course promos to 90-day access campaigns, built on segmented lists and tested subject lines.",
+      "Seasonal promo systems for existing customers: Back to School seat boosts, Sept–Oct course bundles, and 90-day access campaigns, each built on segmented lists and tracked sends.",
     challenge:
       "Keep a large training catalog visible to different audience segments without fatiguing the list.",
     strategy:
-      "Segmented sends by audience interest, A/B tested subject lines and layouts, and timed seasonal promotions around buying cycles.",
+      "Timed seasonal promotions around buying cycles, clear offer tiers for existing customers, and A/B-tested subject lines and layouts.",
     execution:
-      "Designed the email templates, managed audience lists, ran A/B tests, and scheduled sends through Mailchimp and HubSpot with UTM tracking.",
-    deliverables: ["Seasonal promo emails", "Course access campaign", "Segmented lists", "A/B test plan"],
+      "Designed multi-page promo creatives and email templates, managed audience lists, and scheduled sends through Mailchimp and HubSpot with UTM tracking.",
+    deliverables: [
+      "Back to School seat-boost promo",
+      "Sept–Oct custom course bundle promo",
+      "Course access campaign",
+      "Segmented lists",
+      "A/B test plan",
+    ],
     images: [
       {
+        src: "/assets/work/email-back-to-school.webp",
+        width: 951,
+        height: 1654,
+        alt: "Back to School workforce seat-boost promo for Atlantic Training existing customers",
+      },
+      {
         src: "/assets/work/email-fall-promo.webp",
-        width: 1400,
-        height: 2005,
-        alt: "September and October savings promo email for Atlantic Training online courses",
+        width: 977,
+        height: 1400,
+        alt: "September and October custom course bundle promo for Atlantic Training",
       },
       {
         src: "/assets/work/email-course-access.webp",
@@ -232,35 +244,43 @@ export const projects: Project[] = [
     role: ["Content creation", "Layout design", "Landing page support"],
     tools: ["Canva", "WordPress"],
     summary:
-      "A library of branded guides, checklists, and scorecards, from emergency action plans to manager check-in guides, each built to earn downloads.",
+      "A growing library of branded guides, field checklists, protocol cards, and scorecards, each designed to earn downloads and feed the resource hub.",
     deliverables: [
+      "Beat the Heat field safety checklist",
+      "Heat Stress Compliance checklist",
+      "Workplace Violence warning signs card",
       "Emergency Action Plan template",
       "EAP Pre-Season Audit checklist",
-      "Executive Safety Leadership guide",
       "New Hire Safety Onboarding checklist",
       "Safety Program Scorecard",
+      "Executive Safety Leadership guide",
       "Work Vehicle Safety Audit",
       "Manager's Check-In Guide",
-      "Safety Through the Decades timeline",
     ],
     images: [
       {
-        src: "/assets/work/guide-eap-pre-season-audit-checklist-2.webp",
-        width: 1347,
-        height: 1683,
-        alt: "Cover of the EAP Pre-Season Audit checklist lead magnet",
-      },
-      {
-        src: "/assets/work/guide-executive-safety-leadership-guide-1.webp",
+        src: "/assets/work/guide-beat-the-heat-field-safety-checklist.webp",
         width: 1400,
         height: 1751,
-        alt: "Cover of the Executive Safety Leadership guide",
+        alt: "Cover of the Beat the Heat field safety checklist lead magnet",
       },
       {
-        src: "/assets/work/guide-the-new-hire-safety-onboarding-checklist.webp",
-        width: 1324,
-        height: 1712,
-        alt: "Cover of the New Hire Safety Onboarding checklist",
+        src: "/assets/work/guide-heat-stress-compliance-checklist.webp",
+        width: 1400,
+        height: 1751,
+        alt: "Cover of the Heat Stress Compliance checklist",
+      },
+      {
+        src: "/assets/work/guide-workplace-violence-warning-signs-card.webp",
+        width: 1400,
+        height: 1083,
+        alt: "Cover of the Workplace Violence warning signs and response protocol card",
+      },
+      {
+        src: "/assets/work/guide-eap-pre-season-audit-checklist-2.webp",
+        width: 1122,
+        height: 1402,
+        alt: "Cover of the EAP Pre-Season Audit checklist lead magnet",
       },
     ],
     externalUrl: "https://www.atlantictraining.com/resource-hub",

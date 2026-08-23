@@ -15,41 +15,41 @@ export type ExperienceEntry = {
 export const experience: ExperienceEntry[] = [
   {
     company: "Atlantic Training",
-    location: "Remote",
+    location: "Remote · United States",
     roles: [
       {
         title: "Marketing Associate | Email & Campaigns",
-        period: "Jan 2024 - Jul 2026",
+        period: "Jan 2024 – Jul 2026",
         points: [
-          "Owned end-to-end email campaigns in Mailchimp and HubSpot: newsletters, promos, and automated follow-ups.",
-          "Managed segmentation, audience lists, and CRM data to keep sends targeted and compliant.",
-          "Ran A/B tests on subject lines and layouts; tracked performance with UTM parameters and Google Analytics.",
-          "Built website content, landing pages, lead magnets, and resource hubs that fed the email pipeline.",
-          "Optimized YouTube metadata, chapters, and content structure for search.",
+          "Owned end-to-end email campaigns in Mailchimp: newsletters, seasonal promos, webinar sequences, and automated follow-ups.",
+          "Managed HubSpot marketing lists, segmentation, and lead hygiene so sends stayed targeted and compliant.",
+          "Built tracking with Google Analytics and UTM parameters; supported A/B tests on subject lines and layouts.",
+          "Developed newsletters, landing pages, resource hubs, and lead magnets that fed the campaign pipeline.",
+          "Optimized YouTube metadata, chapters, and content structure for search and watch time.",
         ],
       },
     ],
-    tools: ["Mailchimp", "HubSpot", "Google Analytics", "WordPress", "Canva"],
+    tools: ["Mailchimp", "HubSpot", "Google Analytics", "WordPress", "Canva", "YouTube Studio"],
   },
   {
     company: "Core Biz Hub",
-    location: "Singapore, Remote",
+    location: "Singapore · Remote",
     roles: [
       {
         title: "Marketing Lead",
-        period: "Dec 2024 - Jan 2026",
+        period: "Dec 2024 – Jan 2026",
         points: [
-          "Led digital marketing planning and campaign execution across social, content, and web.",
-          "Built and managed automated registration workflows and event funnels in GoHighLevel.",
-          "Trained and supported a new marketing associate on tools, processes, and campaign delivery.",
+          "Led digital marketing initiatives and content strategy across social, website, and promotional channels.",
+          "Managed CRM and marketing automation in GoHighLevel, including registration workflows and event funnels.",
+          "Oversaw digital content and Meta campaigns; trained a new marketing associate on tools and delivery.",
         ],
       },
       {
         title: "Marketing Associate",
-        period: "Sep 2023 - Dec 2024",
+        period: "Sep 2023 – Dec 2024",
         points: [
-          "Ran social media, content strategy, and customer communications.",
-          "Managed CRM data and marketing processes across campaigns.",
+          "Created digital content across social and website platforms for CoreInvest Institute.",
+          "Managed CRM automation and supported Meta campaigns and customer communications.",
         ],
       },
     ],
@@ -61,35 +61,60 @@ export const experience: ExperienceEntry[] = [
     roles: [
       {
         title: "Marketing Expert",
-        period: "Apr 2020 - Dec 2022",
+        period: "Apr 2020 – Dec 2022",
         points: [
-          "Covered digital marketing, SEO, website content, social media, and branding.",
-          "Produced graphic design and video editing for campaign assets.",
+          "Led social media planning, website updates, and analytics for a growing digital brand.",
+          "Researched emerging technologies to improve digital effectiveness and campaign reach.",
+          "Created articles and content that lifted engagement; increased website traffic by 30% through content optimization.",
         ],
       },
     ],
     metric: { value: "+30%", label: "website traffic increase" },
-    tools: ["SEO", "Content", "Design", "Video"],
+    tools: ["SEO", "Content", "Social", "Analytics"],
   },
   {
     company: "Upwork",
-    location: "Remote",
+    location: "Remote · International",
     roles: [
       {
         title: "Virtual Assistant / Digital Marketing Assistant",
-        period: "Sep 2021 - Dec 2022",
+        period: "Sep 2021 – Dec 2022",
         points: [
-          "Supported clients with admin, social media, content, and email management.",
-          "Handled lead generation, research, calendar management, and CRM updates.",
+          "Supported international clients as a legal VA and digital marketing assistant.",
+          "Managed schedules, communications, and client calls alongside SEO tasks and social accounts.",
         ],
       },
     ],
-    tools: ["Canva", "CRM", "Research"],
+    tools: ["Canva", "CRM", "SEO", "Research"],
   },
 ];
 
 export const education = {
-  school: "Polytechnic University of the Philippines",
-  degree: "BSBA, Marketing Management",
-  period: "2019 - 2023",
+  school: "Pamantasan ng Lungsod ng Maynila",
+  schoolAlt: "University of the City of Manila",
+  degree: "Bachelor of Science in Psychology",
+  honor: "Magna Cum Laude",
+  period: "2019 – 2023",
+  honors: ["DOST-SEI RA 7837 Scholar", "Consistent Dean’s Lister"],
 };
+
+export const professionalLicenses = [
+  {
+    title: "Registered Psychometrician (RPm)",
+    issuer: "Professional Regulation Commission (PRC)",
+    date: "August 2024",
+  },
+  {
+    title: "Certified Human Resource Associate (CHRA)",
+    issuer: "Human Resource Association of the Philippines (HREAP)",
+    date: "February 2024",
+  },
+] as const;
+
+export const developmentCerts = [
+  "HubSpot Academy — YouTube Marketing Strategy & Optimization",
+  "Coursera — Digital Marketing & E-commerce Fundamentals",
+  "Udemy — WordPress & SEO Masterclass",
+  "Udemy — Social Media Marketing Mastery",
+  "Udemy — Canva & AI Mastery",
+] as const;
