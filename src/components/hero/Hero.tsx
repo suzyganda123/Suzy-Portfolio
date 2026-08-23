@@ -2,11 +2,11 @@
 
 import { useRef } from "react";
 import { useMounted } from "@/hooks/useMounted";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import Link from "next/link";
 import {
   motion,
   useMotionValue,
-  useReducedMotion,
   useSpring,
   useTransform,
 } from "motion/react";
@@ -35,7 +35,7 @@ const heroChips = [
 
 /** Cream copy left; newhero.png scene right (no duplicate floats — baked into asset). */
 export function Hero() {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const mounted = useMounted();
   const motionOn = mounted && !reduce;
   const riseInitial = motionOn ? ("hidden" as const) : false;

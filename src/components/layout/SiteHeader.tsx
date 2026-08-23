@@ -2,16 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { List, X, ArrowUpRight } from "@phosphor-icons/react";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { nav, site } from "@/data/site";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 /** Seamless chrome: sits on the cream, no pill. Blur only after scroll. */
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 28));
