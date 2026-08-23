@@ -89,26 +89,60 @@ ICONS = {
 
 
 def process_hero_asset():
-    """Full hero scene — prefer newhero.png, fall back to heroasset.png."""
-    src = os.path.join(ROOT, "newhero.png")
-    if not os.path.isfile(src):
-        src = os.path.join(ROOT, "heroasset.png")
-    if not os.path.isfile(src):
-        print("hero asset missing newhero.png / heroasset.png")
+    """Full hero scene — prefer .analysis/newhero2.png, then newhero.png, then heroasset.png."""
+    candidates = [
+        os.path.join(ROOT, ".analysis", "newhero2.png"),
+        os.path.join(ROOT, "newhero.png"),
+        os.path.join(ROOT, "heroasset.png"),
+    ]
+    src = next((p for p in candidates if os.path.isfile(p)), None)
+    if not src:
+        print("hero asset missing newhero2.png / newhero.png / heroasset.png")
         return
     img = Image.open(src).convert("RGBA")
-    if os.path.basename(src).lower() == "heroasset.png":
+    name = os.path.basename(src).lower()
+    # Key near-black canvas so the scene sits on the cream page
+    if name in ("newhero2.png", "heroasset.png") or "newhero" in name:
+        from collections import deque
+
         px = img.load()
         w, h = img.size
-        for y in range(h):
-            for x in range(w):
-                r, g, b, a = px[x, y]
-                if r < 34 and g < 34 and b < 34:
-                    px[x, y] = (r, g, b, 0)
-        img.putalpha(img.getchannel("A").filter(ImageFilter.GaussianBlur(0.7)))
+        thresh = 28 if "newhero2" in name else 34
+
+        def is_bg(x, y):
+            r, g, b, a = px[x, y]
+            return a > 0 and r <= thresh and g <= thresh and b <= thresh
+
+        seen = [[False] * w for _ in range(h)]
+        q = deque()
+        seeds = [(0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)]
+        step_x = max(1, w // 50)
+        step_y = max(1, h // 50)
+        for x in range(0, w, step_x):
+            seeds.extend([(x, 0), (x, h - 1)])
+        for y in range(0, h, step_y):
+            seeds.extend([(0, y), (w - 1, y)])
+        for x, y in seeds:
+            if 0 <= x < w and 0 <= y < h and not seen[y][x] and is_bg(x, y):
+                q.append((x, y))
+                seen[y][x] = True
+        while q:
+            x, y = q.popleft()
+            r, g, b, a = px[x, y]
+            px[x, y] = (r, g, b, 0)
+            for nx, ny in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)):
+                if 0 <= nx < w and 0 <= ny < h and not seen[ny][nx] and is_bg(nx, ny):
+                    seen[ny][nx] = True
+                    q.append((nx, ny))
+        img.putalpha(img.getchannel("A").filter(ImageFilter.GaussianBlur(0.6)))
     bbox = img.getbbox()
     if bbox:
-        img = img.crop(bbox)
+        pad = 4
+        left = max(0, bbox[0] - pad)
+        top = max(0, bbox[1] - pad)
+        right = min(img.width, bbox[2] + pad)
+        bottom = min(img.height, bbox[3] + pad)
+        img = img.crop((left, top, right, bottom))
     dest = out_path("hero", "hero-scene.webp")
     img.save(dest, "WEBP", lossless=True, quality=100, method=6)
     rel = "/" + os.path.relpath(dest, os.path.join(ROOT, "public")).replace("\\", "/")
@@ -121,7 +155,7 @@ def process_hero_asset():
             "height": img.height,
         }
     )
-    print("hero", "hero-scene.webp", img.width, "x", img.height)
+    print("hero", os.path.basename(src), "->", "hero-scene.webp", img.width, "x", img.height)
 
 
 def process_logos():

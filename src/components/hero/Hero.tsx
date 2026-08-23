@@ -33,7 +33,7 @@ const heroChips = [
   { name: "Virtual Assistance", color: "blue" },
 ] as const;
 
-/** Cream copy left; newhero.png scene right (no duplicate floats — baked into asset). */
+/** Cream copy left; newhero2.png scene right (floats baked into asset). */
 export function Hero() {
   const reduce = usePrefersReducedMotion();
   const mounted = useMounted();
@@ -174,7 +174,7 @@ export function Hero() {
               initial={motionOn ? { opacity: 0, y: 20, scale: 0.98 } : false}
               animate={motionOn ? { opacity: 1, y: 0, scale: 1 } : false}
               transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-              className="relative mx-auto w-full lg:ml-auto lg:mr-[-4%] lg:w-[106%] xl:mr-[-6%] xl:w-[108%] 2xl:mr-[-4%] 2xl:w-[104%]"
+              className="relative mx-auto w-full max-w-[640px] sm:max-w-none lg:ml-auto lg:mr-[-2%] lg:w-[104%] xl:mr-[-4%] xl:w-[106%] 2xl:mr-[-2%] 2xl:w-[102%]"
             >
               <LaptopMockup
                 style={motionOn ? { rotateX: sceneRotateX, rotateY: sceneRotateY } : undefined}
