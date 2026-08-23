@@ -3,7 +3,7 @@ export const site = {
   fullName: "Suzette Elyza S. Sun",
   role: "Digital Marketing | Campaigns | Marketing Operations",
   email: "suzetteelyza2002@gmail.com",
-  phone: "+63 956 379 9236",
+  phone: "09167014456",
   location: "Imus, Cavite, Philippines",
   linkedin: "https://www.linkedin.com/in/suzettesun",
   positioning:
