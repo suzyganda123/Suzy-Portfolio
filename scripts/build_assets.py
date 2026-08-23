@@ -89,38 +89,39 @@ ICONS = {
 
 
 def process_hero_asset():
-    """Laptop hero mockup from project root — keyed to transparent for cream bg."""
-    src = os.path.join(ROOT, "heroasset.png")
+    """Full hero scene — prefer newhero.png, fall back to heroasset.png."""
+    src = os.path.join(ROOT, "newhero.png")
     if not os.path.isfile(src):
-        print("hero asset missing heroasset.png")
+        src = os.path.join(ROOT, "heroasset.png")
+    if not os.path.isfile(src):
+        print("hero asset missing newhero.png / heroasset.png")
         return
     img = Image.open(src).convert("RGBA")
-    px = img.load()
-    w, h = img.size
-    for y in range(h):
-        for x in range(w):
-            r, g, b, a = px[x, y]
-            if r < 34 and g < 34 and b < 34:
-                px[x, y] = (r, g, b, 0)
-    # Feather the cut so the keyed edge does not read as a dark fringe on cream.
-    img.putalpha(img.getchannel("A").filter(ImageFilter.GaussianBlur(0.7)))
+    if os.path.basename(src).lower() == "heroasset.png":
+        px = img.load()
+        w, h = img.size
+        for y in range(h):
+            for x in range(w):
+                r, g, b, a = px[x, y]
+                if r < 34 and g < 34 and b < 34:
+                    px[x, y] = (r, g, b, 0)
+        img.putalpha(img.getchannel("A").filter(ImageFilter.GaussianBlur(0.7)))
     bbox = img.getbbox()
     if bbox:
         img = img.crop(bbox)
-    # Keep native resolution: the source is the ceiling, upscaling would only invent detail.
-    dest = out_path("hero", "hero-workspace.webp")
+    dest = out_path("hero", "hero-scene.webp")
     img.save(dest, "WEBP", lossless=True, quality=100, method=6)
     rel = "/" + os.path.relpath(dest, os.path.join(ROOT, "public")).replace("\\", "/")
     manifest.append(
         {
-            "id": "hero-workspace.webp",
+            "id": "hero-scene.webp",
             "kind": "hero",
             "src": rel,
             "width": img.width,
             "height": img.height,
         }
     )
-    print("hero", "hero-workspace.webp", img.width, "x", img.height)
+    print("hero", "hero-scene.webp", img.width, "x", img.height)
 
 
 def process_logos():

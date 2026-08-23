@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useMounted } from "@/hooks/useMounted";
 import Link from "next/link";
 import {
   motion,
@@ -14,11 +15,8 @@ import { site } from "@/data/site";
 import { Chip } from "@/components/ui/Chip";
 import { Container } from "@/components/layout/Container";
 import { LaptopMockup } from "./LaptopMockup";
-import { FeaturedProjectCard } from "./FeaturedProjectCard";
 import { HeroProofStrip } from "./HeroProofStrip";
 import { HeroQuoteCard } from "./HeroQuoteCard";
-import { ServicesDock } from "./ServicesDock";
-import { HeroContactCard } from "./HeroContactCard";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -27,7 +25,6 @@ const rise = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
 };
 
-/** Matches heropage.jpg chip row — all real capabilities. */
 const heroChips = [
   { name: "Brand Strategy", color: "pink" },
   { name: "Social Media", color: "orange" },
@@ -36,8 +33,12 @@ const heroChips = [
   { name: "Virtual Assistance", color: "blue" },
 ] as const;
 
+/** Cream copy left; newhero.png scene right (no duplicate floats — baked into asset). */
 export function Hero() {
   const reduce = useReducedMotion();
+  const mounted = useMounted();
+  const motionOn = mounted && !reduce;
+  const riseInitial = motionOn ? ("hidden" as const) : false;
   const sceneRef = useRef<HTMLDivElement>(null);
 
   const mx = useMotionValue(0);
@@ -45,10 +46,8 @@ export function Hero() {
   const sx = useSpring(mx, { stiffness: 55, damping: 16, mass: 0.6 });
   const sy = useSpring(my, { stiffness: 55, damping: 16, mass: 0.6 });
 
-  const laptopRotateY = useTransform(sx, [-0.5, 0.5], [-1.4, 1.4]);
-  const laptopRotateX = useTransform(sy, [-0.5, 0.5], [0.9, -0.9]);
-  const cardX = useTransform(sx, [-0.5, 0.5], [-5, 5]);
-  const cardY = useTransform(sy, [-0.5, 0.5], [-4, 4]);
+  const sceneRotateY = useTransform(sx, [-0.5, 0.5], [-1.1, 1.1]);
+  const sceneRotateX = useTransform(sy, [-0.5, 0.5], [0.7, -0.7]);
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (reduce || !window.matchMedia("(pointer: fine)").matches || !sceneRef.current) return;
@@ -66,24 +65,25 @@ export function Hero() {
     <section
       id="top"
       ref={sceneRef}
-      className="relative overflow-hidden pb-10 lg:min-h-[100dvh] lg:pb-8"
+      className="relative overflow-x-clip pb-12 lg:min-h-[100dvh] lg:pb-10"
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
     >
       <AmbientBackground />
 
       <Container wide className="relative">
-        <div className="grid grid-cols-1 items-start pt-[88px] md:pt-[96px] lg:grid-cols-12 lg:gap-4 lg:pt-[108px] xl:gap-6">
+        <div className="grid grid-cols-1 items-start pt-[88px] md:pt-[96px] lg:grid-cols-12 lg:items-end lg:gap-2 lg:pt-[104px] xl:gap-4">
           <motion.div
-            className="relative z-[3] min-w-0 lg:col-span-5 lg:pt-10 xl:col-span-4 xl:pt-14"
-            initial={reduce ? false : "hidden"}
-            animate="show"
+            className="relative z-[3] min-w-0 lg:col-span-5 lg:pb-8 xl:col-span-4 xl:pb-10"
+            initial={false}
+            animate={motionOn ? "show" : false}
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.04 } } }}
           >
             <Sparkle className="mb-2 lg:absolute lg:-left-1 lg:top-6 lg:mb-0 xl:left-0" />
 
             <motion.p
               variants={rise}
+              initial={riseInitial}
               className="flex items-center gap-2.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-muted sm:text-[10px]"
             >
               <span className="h-px w-4 bg-muted/70" aria-hidden />
@@ -94,6 +94,7 @@ export function Hero() {
               <CurveArrow className="pointer-events-none absolute -left-[72px] top-[38%] hidden 2xl:block" />
               <motion.h1
                 variants={rise}
+                initial={riseInitial}
                 className="mt-3.5 text-[clamp(2.4rem,4.2vw,3.85rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-ink"
               >
                 <span className="block">I create</span>
@@ -104,12 +105,13 @@ export function Hero() {
 
             <motion.p
               variants={rise}
+              initial={riseInitial}
               className="mt-4 max-w-[36ch] text-[14.5px] leading-[1.65] text-muted"
             >
               {site.positioning}
             </motion.p>
 
-            <motion.div variants={rise} className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
+            <motion.div variants={rise} initial={riseInitial} className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
               <Link
                 href="#work"
                 className="pressable group/cta inline-flex items-center gap-2.5 rounded-full bg-ink px-6 py-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-surface shadow-soft hover:bg-zinc-900"
@@ -140,12 +142,14 @@ export function Hero() {
 
             <motion.p
               variants={rise}
+              initial={riseInitial}
               className="mt-8 text-[9px] font-semibold uppercase tracking-[0.2em] text-muted"
             >
               What I Do
             </motion.p>
             <motion.ul
               variants={rise}
+              initial={riseInitial}
               className="mt-3 flex flex-wrap gap-2"
               aria-label="Core capabilities"
             >
@@ -156,47 +160,33 @@ export function Hero() {
               ))}
             </motion.ul>
 
-            <motion.div variants={rise} className="mt-8 hidden lg:block">
+            <motion.div variants={rise} initial={riseInitial} className="mt-8 hidden lg:block">
               <HeroProofStrip />
+            </motion.div>
+
+            <motion.div variants={rise} initial={riseInitial} className="mt-6 hidden lg:block">
+              <HeroQuoteCard />
             </motion.div>
           </motion.div>
 
-          <div className="relative mt-10 min-w-0 lg:col-span-7 lg:mt-0 xl:col-span-8">
+          <div className="relative mt-8 min-w-0 lg:col-span-7 lg:mt-0 xl:col-span-8">
             <motion.div
-              initial={reduce ? false : { opacity: 0, y: 24, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
+              initial={motionOn ? { opacity: 0, y: 20, scale: 0.98 } : false}
+              animate={motionOn ? { opacity: 1, y: 0, scale: 1 } : false}
               transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-              className="relative mx-auto w-full max-w-[680px] lg:ml-auto lg:mr-0 lg:max-w-none lg:w-[98%] xl:w-[94%]"
+              className="relative mx-auto w-full lg:ml-auto lg:mr-[-4%] lg:w-[106%] xl:mr-[-6%] xl:w-[108%] 2xl:mr-[-4%] 2xl:w-[104%]"
             >
-              <LaptopMockup style={reduce ? undefined : { rotateX: laptopRotateX, rotateY: laptopRotateY }} />
-
-              <motion.div
-                initial={reduce ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.34, ease: EASE }}
-                style={reduce ? undefined : { x: cardX, y: cardY }}
-                className="relative z-[5] mx-auto mt-6 w-full max-w-[280px] lg:absolute lg:right-[-2%] lg:top-[16%] lg:mt-0 lg:w-[31%] lg:max-w-[268px] xl:right-[1%] xl:top-[14%]"
-              >
-                <FeaturedProjectCard />
-              </motion.div>
+              <LaptopMockup
+                style={motionOn ? { rotateX: sceneRotateX, rotateY: sceneRotateY } : undefined}
+              />
             </motion.div>
           </div>
         </div>
 
-        <div className="mt-8 lg:hidden">
+        <div className="mt-8 space-y-4 lg:hidden">
           <HeroProofStrip />
-        </div>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.58, ease: EASE }}
-          className="relative z-[5] mt-8 grid grid-cols-1 gap-4 lg:mt-6 lg:grid-cols-[0.95fr_1.55fr_1fr] lg:items-stretch xl:mt-4"
-        >
           <HeroQuoteCard />
-          <ServicesDock />
-          <HeroContactCard />
-        </motion.div>
+        </div>
       </Container>
     </section>
   );

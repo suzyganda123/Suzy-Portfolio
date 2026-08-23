@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
+import { useMounted } from "@/hooks/useMounted";
 
 type RevealProps = {
   children: ReactNode;
@@ -13,6 +14,10 @@ type RevealProps = {
 
 export function Reveal({ children, delay = 0, y = 24, className, amount = 0.3 }: RevealProps) {
   const reduce = useReducedMotion();
+  const mounted = useMounted();
+
+  if (!mounted) return <div className={className}>{children}</div>;
+
   return (
     <motion.div
       className={className}

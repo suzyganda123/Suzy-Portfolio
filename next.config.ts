@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   async headers() {
+    const assetCache =
+      process.env.NODE_ENV === "production"
+        ? "public, max-age=31536000, immutable"
+        : "public, max-age=0, must-revalidate";
+
     return [
       {
         source: "/:path*",
@@ -30,7 +35,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: assetCache,
           },
         ],
       },

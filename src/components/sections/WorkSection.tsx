@@ -81,6 +81,9 @@ function FeaturedCard({
   tall?: boolean;
 }) {
   const img = project.images[0];
+  const hasWorkLinks = Boolean(project.workLinks?.length);
+  const linked = Boolean(href) && !hasWorkLinks;
+
   const body = (
     <>
       <div className={`zoom-frame relative ${tall ? "h-[300px] md:h-[420px]" : "h-[260px] md:h-[300px]"}`}>
@@ -93,20 +96,30 @@ function FeaturedCard({
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
         />
       </div>
-      <CardMeta project={project} external={external} linked={Boolean(href)} />
+      <CardMeta project={project} external={external} linked={linked} />
     </>
   );
 
   const cls =
     "pressable group block overflow-hidden rounded-xl glass-card hover:shadow-lift";
 
-  if (!href) return <div className={cls}>{body}</div>;
-  if (external)
+  // Work-link pills are the targets — wrapping the card would nest <a> inside <a>.
+  if (hasWorkLinks || !href) return <div className={cls}>{body}</div>;
+
+  if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={cls} aria-label={`${project.title}, opens live page`}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cls}
+        aria-label={`${project.title}, opens live page`}
+      >
         {body}
       </a>
     );
+  }
+
   return (
     <a href={href} className={cls} aria-label={`${project.title}, view case study`}>
       {body}
