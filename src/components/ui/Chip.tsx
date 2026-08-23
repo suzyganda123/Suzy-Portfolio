@@ -19,16 +19,19 @@ export function Chip({ label, color, size = "default" }: ChipProps) {
   const compact = size === "compact";
   return (
     <span
-      className={`glass-card inline-flex items-center rounded-full text-ink ${
+      className={`glass-float relative z-0 inline-flex items-center rounded-full text-ink ${
         compact
-          ? "gap-2 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.11em]"
+          ? "gap-2 px-3.5 py-2 text-[9px] font-semibold uppercase tracking-[0.11em]"
           : "gap-2 px-3.5 py-1.5 text-[13px] font-medium"
       }`}
     >
       {color ? (
-        <span className={`size-2 rounded-[3px] ${dotColors[color] ?? "bg-ink"}`} aria-hidden />
+        <span
+          className={`relative z-[1] size-2 shrink-0 rounded-[3px] shadow-[0_0_0_1px_rgb(255_255_255/0.35)] ${dotColors[color] ?? "bg-ink"}`}
+          aria-hidden
+        />
       ) : null}
-      {label}
+      <span className="relative z-[1]">{label}</span>
     </span>
   );
 }
