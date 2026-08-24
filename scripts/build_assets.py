@@ -351,6 +351,12 @@ def main():
     process_hero_asset()
     process_logos()
     fetch_icons()
+    try:
+        import runpy
+
+        runpy.run_path(os.path.join(ROOT, "scripts", "build_favicons.py"), run_name="__main__")
+    except Exception as e:
+        print("favicons skip:", e)
 
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
     with open(MANIFEST, "w") as f:

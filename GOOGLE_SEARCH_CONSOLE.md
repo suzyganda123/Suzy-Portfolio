@@ -67,11 +67,21 @@ If you prefer not to use an env var:
 
 ## Step 3 — Submit the sitemap
 
-1. In GSC, open the property → **Sitemaps** (left menu).
-2. Enter: `sitemap.xml`
-3. Click **Submit**.
+You already have a **Domain** property (`suzettesun.com`). On **Sitemaps**:
+
+1. In **Add a new sitemap**, enter exactly:
+
+   ```
+   https://suzettesun.com/sitemap.xml
+   ```
+
+   (If the field only accepts a path, use: `sitemap.xml`)
+
+2. Click **SUBMIT**.
 
 Status should move to **Success** within a few hours. One URL is expected (single-page portfolio).
+
+Live check: open https://suzettesun.com/sitemap.xml — you should see valid XML.
 
 ---
 
