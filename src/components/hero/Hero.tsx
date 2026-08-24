@@ -33,7 +33,7 @@ const heroChips = [
   { name: "Virtual Assistance", color: "blue" },
 ] as const;
 
-/** Cream copy left; newhero2.png scene right (floats baked into asset). */
+/** Cream copy left; heronew.png scene right (floats baked into asset). */
 export function Hero() {
   const reduce = usePrefersReducedMotion();
   const mounted = useMounted();

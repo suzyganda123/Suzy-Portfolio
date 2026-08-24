@@ -3,11 +3,11 @@
 import Image from "next/image";
 import { motion, type MotionStyle } from "motion/react";
 
-/** Full hero scene from newhero2.png (laptop, plinth, glass floats baked in). */
+/** Full hero scene from heronew.png (laptop, plinth, glass floats baked in). */
 const HERO = {
   src: "/assets/hero/hero-scene.webp",
-  width: 1428,
-  height: 1086,
+  width: 1401,
+  height: 1081,
 } as const;
 
 export function LaptopMockup({ style }: { style?: MotionStyle }) {

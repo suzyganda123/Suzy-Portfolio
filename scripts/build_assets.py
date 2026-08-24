@@ -89,25 +89,27 @@ ICONS = {
 
 
 def process_hero_asset():
-    """Full hero scene — prefer .analysis/newhero2.png, then newhero.png, then heroasset.png."""
+    """Full hero scene — prefer .analysis/heronew.png (final), then newhero2/newhero/heroasset."""
     candidates = [
+        os.path.join(ROOT, ".analysis", "heronew.png"),
         os.path.join(ROOT, ".analysis", "newhero2.png"),
         os.path.join(ROOT, "newhero.png"),
         os.path.join(ROOT, "heroasset.png"),
     ]
     src = next((p for p in candidates if os.path.isfile(p)), None)
     if not src:
-        print("hero asset missing newhero2.png / newhero.png / heroasset.png")
+        print("hero asset missing heronew.png / newhero2.png / newhero.png / heroasset.png")
         return
     img = Image.open(src).convert("RGBA")
     name = os.path.basename(src).lower()
     # Key near-black canvas so the scene sits on the cream page
-    if name in ("newhero2.png", "heroasset.png") or "newhero" in name:
+    if name in ("heronew.png", "newhero2.png", "heroasset.png") or "newhero" in name:
         from collections import deque
 
         px = img.load()
         w, h = img.size
-        thresh = 28 if "newhero2" in name else 34
+        # heronew: slightly softer key — keep soft shadows on plinth/laptop
+        thresh = 26 if name == "heronew.png" else (28 if "newhero2" in name else 34)
 
         def is_bg(x, y):
             r, g, b, a = px[x, y]
