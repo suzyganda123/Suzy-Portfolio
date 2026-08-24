@@ -153,6 +153,11 @@ def main() -> None:
     master.save(ico_path, format="ICO", sizes=[(16, 16), (32, 32), (48, 48)])
     print("wrote", ico_path, os.path.getsize(ico_path), "bytes")
 
+    # Next.js App Router prefers src/app/favicon.ico over public/
+    app_ico = os.path.join(APP, "favicon.ico")
+    master.save(app_ico, format="ICO", sizes=[(16, 16), (32, 32), (48, 48)])
+    print("wrote", app_ico, os.path.getsize(app_ico), "bytes")
+
     old_svg = os.path.join(APP, "icon.svg")
     if os.path.isfile(old_svg):
         os.remove(old_svg)
