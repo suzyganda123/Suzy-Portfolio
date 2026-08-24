@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.suzettesun.com" }],
+      "destination": "https://suzettesun.com/:path*",
+      "permanent": true
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { Hero } from "@/components/hero/Hero";
@@ -9,6 +10,13 @@ import { About } from "@/components/sections/About";
 import { Experience } from "@/components/sections/Experience";
 import { Credentials } from "@/components/sections/Credentials";
 import { Contact } from "@/components/sections/Contact";
+import { seoDescription } from "@/lib/json-ld";
+
+export const metadata: Metadata = {
+  title: "Suzette Sun | Digital Marketing, Campaigns & Marketing Operations",
+  description: seoDescription,
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

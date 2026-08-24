@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Playfair_Display } from "next/font/google";
 import { site } from "@/data/site";
+import { jsonLdBlocks, seoDescription } from "@/lib/json-ld";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import "./globals.css";
 
@@ -20,8 +21,7 @@ const playfair = Playfair_Display({
   preload: true,
 });
 
-const description =
-  "Suzette Sun is a digital marketing professional specializing in campaigns, email marketing, CRM and automation, content, and marketing operations. View real campaign work and case studies.";
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -29,7 +29,8 @@ export const metadata: Metadata = {
     default: "Suzette Sun | Digital Marketing, Campaigns & Marketing Operations",
     template: "%s | Suzette Sun",
   },
-  description,
+  description: seoDescription,
+  applicationName: site.name,
   keywords: [
     "Suzette Sun",
     "digital marketing",
@@ -46,20 +47,37 @@ export const metadata: Metadata = {
   creator: site.fullName,
   publisher: site.fullName,
   category: "marketing",
-  alternates: { canonical: "/" },
+  formatDetection: {
+    email: true,
+    telephone: true,
+    address: false,
+  },
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-PH": site.url,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_PH",
     url: site.url,
-    siteName: "Suzette Sun",
+    siteName: site.name,
     title: "Suzette Sun | Digital Marketing, Campaigns & Marketing Operations",
-    description,
-    images: [{ url: "/assets/og.jpg", width: 1200, height: 630, alt: "Suzette Sun, digital marketing portfolio" }],
+    description: seoDescription,
+    images: [
+      {
+        url: "/assets/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Suzette Sun, digital marketing portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Suzette Sun | Digital Marketing, Campaigns & Marketing Operations",
-    description,
+    description: seoDescription,
     images: ["/assets/og.jpg"],
   },
   robots: {
@@ -73,6 +91,13 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  ...(googleVerification
+    ? {
+        verification: {
+          google: googleVerification,
+        },
+      }
+    : {}),
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -92,65 +117,17 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.fullName,
-  alternateName: site.name,
-  jobTitle: "Digital Marketing Professional",
-  description,
-  email: `mailto:${site.email}`,
-  telephone: site.phone,
-  image: `${site.url}/assets/photos/suzette-headshot.webp`,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Imus",
-    addressRegion: "Cavite",
-    addressCountry: "PH",
-  },
-  knowsAbout: [
-    "Digital Marketing",
-    "Email Marketing",
-    "Campaign Strategy",
-    "Marketing Operations",
-    "CRM & Automation",
-    "Content Marketing",
-    "SEO",
-    "Social Media Marketing",
-  ],
-  alumniOf: {
-    "@type": "CollegeOrUniversity",
-    name: "Pamantasan ng Lungsod ng Maynila",
-  },
-  sameAs: ["https://www.linkedin.com/in/suzettesun"],
-  url: site.url,
-};
-
-const websiteJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Suzette Sun",
-  url: site.url,
-  description,
-  inLanguage: "en",
-  publisher: {
-    "@type": "Person",
-    name: site.fullName,
-  },
-};
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${playfair.variable}`}>
+    <html lang="en-PH" className={`${geist.variable} ${playfair.variable}`}>
       <body className="grain">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
+        {jsonLdBlocks.map((block) => (
+          <script
+            key={block["@id"] as string}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(block) }}
+          />
+        ))}
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

@@ -4,8 +4,12 @@ export const site = {
   role: "Digital Marketing | Campaigns | Marketing Operations",
   email: "suzetteelyza2002@gmail.com",
   phone: "09167014456",
+  /** E.164 for schema.org and international crawlers */
+  phoneE164: "+639167014456",
   location: "Imus, Cavite, Philippines",
   linkedin: "https://www.linkedin.com/in/suzettesun",
+  /** ISO date for sitemap + structured data freshness signals */
+  lastUpdated: "2026-08-24",
   positioning:
     "Multidisciplinary marketing professional who plans, builds, and runs email campaigns, CRM systems, content, and SEO, from brief to report.",
   tagline: "Always learning. Always growing.",
