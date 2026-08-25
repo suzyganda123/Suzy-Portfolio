@@ -63,6 +63,7 @@ export const profilePageJsonLd = {
   isPartOf: { "@id": `${site.url}/#website` },
   about: { "@id": `${site.url}/#person` },
   mainEntity: { "@id": `${site.url}/#person` },
+  datePublished: "2026-08-23T00:00:00+08:00",
   dateModified: site.lastUpdated,
 };
 

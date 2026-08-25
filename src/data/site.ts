@@ -8,8 +8,8 @@ export const site = {
   phoneE164: "+639167014456",
   location: "Imus, Cavite, Philippines",
   linkedin: "https://www.linkedin.com/in/suzettesun",
-  /** ISO date for sitemap + structured data freshness signals */
-  lastUpdated: "2026-08-24",
+  /** ISO-8601 datetime for schema.org dateModified (Google rejects date-only) */
+  lastUpdated: "2026-08-25T12:00:00+08:00",
   positioning:
     "Multidisciplinary marketing professional who plans, builds, and runs email campaigns, CRM systems, content, and SEO, from brief to report.",
   tagline: "Always learning. Always growing.",
