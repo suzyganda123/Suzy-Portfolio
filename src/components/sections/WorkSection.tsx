@@ -1,5 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, ArrowUpRight } from "@phosphor-icons/react";
 import {
   archiveProjects,
   featuredProjects,
@@ -9,6 +12,7 @@ import {
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { Container } from "@/components/layout/Container";
 import { Reveal } from "@/components/motion/Reveal";
+import { ImageLightbox } from "@/components/ui/ImageLightbox";
 
 const accentText: Record<string, string> = {
   coral: "text-coral",
@@ -100,6 +104,7 @@ export function WorkSection() {
 
 function GuideShowcase({ project, reverse }: { project: Project; reverse?: boolean }) {
   const covers = project.images.slice(0, 4);
+  const [active, setActive] = useState<number | null>(null);
 
   return (
     <article className="grid items-end gap-8 lg:grid-cols-12 lg:gap-10">
@@ -142,24 +147,40 @@ function GuideShowcase({ project, reverse }: { project: Project; reverse?: boole
           {covers.map((img, idx) => (
             <li
               key={img.src}
-              className={`zoom-frame relative w-[42vw] shrink-0 overflow-hidden rounded-xl glass-card sm:w-[200px] md:w-auto ${
+              className={`relative w-[42vw] shrink-0 sm:w-[200px] md:w-auto ${
                 idx === 0 ? "md:-translate-y-2" : idx === 2 ? "md:translate-y-3" : ""
               }`}
             >
-              <div className="relative aspect-[3/4]">
-                <Image
-                  src={img.src}
-                  width={img.width}
-                  height={img.height}
-                  alt={img.alt}
-                  className="h-full w-full object-cover object-top"
-                  sizes="(max-width: 768px) 42vw, 220px"
-                />
-              </div>
+              <button
+                type="button"
+                onClick={() => setActive(idx)}
+                className="pressable zoom-frame group relative block w-full overflow-hidden rounded-xl glass-card text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                aria-label={`View larger: ${img.alt}`}
+              >
+                <div className="relative aspect-[3/4]">
+                  <Image
+                    src={img.src}
+                    width={img.width}
+                    height={img.height}
+                    alt={img.alt}
+                    className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 42vw, 220px"
+                  />
+                </div>
+              </button>
             </li>
           ))}
         </ul>
       </div>
+
+      {active !== null ? (
+        <ImageLightbox
+          images={covers}
+          index={active}
+          onClose={() => setActive(null)}
+          onChange={setActive}
+        />
+      ) : null}
     </article>
   );
 }
@@ -238,24 +259,42 @@ function FeaturedCard({
 }
 
 function SocialCard({ project }: { project: Project }) {
+  const [active, setActive] = useState<number | null>(null);
+
   return (
-    <div className="group overflow-hidden rounded-xl glass-card">
-      <div className="grid grid-cols-2 gap-2 bg-bg p-2">
-        {project.images.map((img) => (
-          <div key={img.src} className="zoom-frame relative aspect-square rounded-md">
-            <Image
-              src={img.src}
-              width={img.width}
-              height={img.height}
-              alt={img.alt}
-              className="h-full w-full object-cover"
-              sizes="(max-width: 768px) 50vw, 320px"
-            />
-          </div>
-        ))}
+    <>
+      <div className="group overflow-hidden rounded-xl glass-card">
+        <div className="grid grid-cols-2 gap-2 bg-bg p-2">
+          {project.images.map((img, idx) => (
+            <button
+              key={img.src}
+              type="button"
+              onClick={() => setActive(idx)}
+              className="pressable zoom-frame relative aspect-square overflow-hidden rounded-md text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              aria-label={`View larger: ${img.alt}`}
+            >
+              <Image
+                src={img.src}
+                width={img.width}
+                height={img.height}
+                alt={img.alt}
+                className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
+                sizes="(max-width: 768px) 50vw, 320px"
+              />
+            </button>
+          ))}
+        </div>
+        <CardMeta project={project} linked={false} />
       </div>
-      <CardMeta project={project} linked={false} />
-    </div>
+      {active !== null ? (
+        <ImageLightbox
+          images={project.images}
+          index={active}
+          onClose={() => setActive(null)}
+          onChange={setActive}
+        />
+      ) : null}
+    </>
   );
 }
 
