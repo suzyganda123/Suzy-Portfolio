@@ -75,16 +75,17 @@ def social(src_name, dest_name, max_w=1080):
     print("social", dest_name, meta["width"], "x", meta["height"])
 
 
-ICONS = {
+    ICONS = {
     "mailchimp": "Mailchimp",
     "hubspot": "HubSpot",
-    "gohighlevel": "GoHighLevel",
+    "n8n": "n8n",
     "googleanalytics": "Google Analytics",
     "googletagmanager": "Google Tag Manager",
     "canva": "Canva",
     "meta": "Meta",
     "wordpress": "WordPress",
     "figma": "Figma",
+    "googleads": "Google Ads",
 }
 
 

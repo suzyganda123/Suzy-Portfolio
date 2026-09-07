@@ -12,48 +12,44 @@ export type ExperienceEntry = {
   tools: string[];
 };
 
+/** Experience aligned to Suzette_Sun_CV.pdf (Sep 2026). */
 export const experience: ExperienceEntry[] = [
   {
-    company: "Atlantic Training",
-    location: "Remote · United States",
+    company: "Invest Intelligent Pte Ltd",
+    location: "Singapore · Remote",
     roles: [
       {
-        title: "Marketing Associate | Email & Campaigns",
-        period: "Jan 2024 – Jul 2026",
+        title: "Marketing Team Lead",
+        period: "Sep 2023 – Present",
         points: [
-          "Owned end-to-end email campaigns in Mailchimp: newsletters, seasonal promos, webinar sequences, and automated follow-ups.",
-          "Managed HubSpot marketing lists, segmentation, and lead hygiene so sends stayed targeted and compliant.",
-          "Built tracking with Google Analytics and UTM parameters; supported A/B tests on subject lines and layouts.",
-          "Developed newsletters, landing pages, resource hubs, and lead magnets that fed the campaign pipeline.",
-          "Optimized YouTube metadata, chapters, and content structure for search and watch time.",
+          "Lead digital marketing initiatives, campaign execution, content planning, social media, website marketing, CRM, automation, and customer communications across recurring and promotional campaigns.",
+          "Manage marketing workflows in GoHighLevel, including event funnels, registration processes, automated messaging, campaign databases, and customer follow-up.",
+          "Coordinate campaign priorities, content requirements, timelines, and execution across multiple digital channels.",
+          "Support and train marketing staff on planning, automation tools, social media, customer relations, and database management.",
+          "Maintain organized marketing processes and documentation to improve consistency and day-to-day execution.",
+        ],
+      },
+    ],
+    tools: ["GoHighLevel", "Meta", "Canva", "n8n", "CRM"],
+  },
+  {
+    company: "Atlantic Training",
+    location: "United States · Contract",
+    roles: [
+      {
+        title: "Contract Marketing Associate",
+        period: "Nov 2024 – Aug 2026",
+        points: [
+          "Managed recurring social media content across Facebook, LinkedIn, and X for a U.S. professional and compliance-focused audience.",
+          "Built and supported email marketing campaigns in Mailchimp, including Coffee & Compliance, promotional emails, segmentation, scheduling, QA, and deployment.",
+          "Designed and coordinated landing pages, campaign pages, lead magnets, resource hubs, and other marketing assets from brief through launch.",
+          "Managed HubSpot marketing lists and customer data for segmentation, targeting, exports, and database organization.",
+          "Maintained Google Analytics and UTM campaign tracking, including troubleshooting tracking inconsistencies.",
+          "Collaborated with copywriters, developers, production, operations, and leadership on cross-channel campaign launches.",
         ],
       },
     ],
     tools: ["Mailchimp", "HubSpot", "Google Analytics", "WordPress", "Canva", "YouTube Studio"],
-  },
-  {
-    company: "Core Biz Hub",
-    location: "Singapore · Remote",
-    roles: [
-      {
-        title: "Marketing Lead",
-        period: "Dec 2024 – Jan 2026",
-        points: [
-          "Led digital marketing initiatives and content strategy across social, website, and promotional channels.",
-          "Managed CRM and marketing automation in GoHighLevel, including registration workflows and event funnels.",
-          "Oversaw digital content and Meta campaigns; trained a new marketing associate on tools and delivery.",
-        ],
-      },
-      {
-        title: "Marketing Associate",
-        period: "Sep 2023 – Dec 2024",
-        points: [
-          "Created digital content across social and website platforms for CoreInvest Institute.",
-          "Managed CRM automation and supported Meta campaigns and customer communications.",
-        ],
-      },
-    ],
-    tools: ["GoHighLevel", "Meta", "Canva", "CRM"],
   },
   {
     company: "CyberWrath",
@@ -63,9 +59,9 @@ export const experience: ExperienceEntry[] = [
         title: "Marketing Expert",
         period: "Apr 2020 – Dec 2022",
         points: [
-          "Led social media planning, website updates, and analytics for a growing digital brand.",
-          "Researched emerging technologies to improve digital effectiveness and campaign reach.",
-          "Created articles and content that lifted engagement; increased website traffic by 30% through content optimization.",
+          "Led monthly social media planning, website updates, marketing research, and analytics.",
+          "Created website articles and social content; researched digital marketing trends and emerging technologies.",
+          "Increased website traffic by 30% through content optimization and strategic marketing initiatives.",
         ],
       },
     ],
@@ -80,8 +76,8 @@ export const experience: ExperienceEntry[] = [
         title: "Virtual Assistant / Digital Marketing Assistant",
         period: "Sep 2021 – Dec 2022",
         points: [
-          "Supported international clients as a legal VA and digital marketing assistant.",
-          "Managed schedules, communications, and client calls alongside SEO tasks and social accounts.",
+          "Supported international clients with legal virtual assistance, digital marketing, research, scheduling, and client communications.",
+          "Supported SEO activities, social media management, and general remote business operations.",
         ],
       },
     ],
@@ -112,9 +108,10 @@ export const professionalLicenses = [
 ] as const;
 
 export const developmentCerts = [
-  "HubSpot Academy — YouTube Marketing Strategy & Optimization",
-  "Coursera — Digital Marketing & E-commerce Fundamentals",
-  "Udemy — WordPress & SEO Masterclass",
-  "Udemy — Social Media Marketing Mastery",
-  "Udemy — Canva & AI Mastery",
+  "Digital Marketing & E-commerce",
+  "Digital Marketing Trends",
+  "YouTube Strategy & SEO",
+  "WordPress & SEO Masterclass",
+  "Social Media Marketing Mastery",
+  "Canva Mastery | AI & GPT",
 ] as const;

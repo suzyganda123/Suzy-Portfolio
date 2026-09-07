@@ -1,7 +1,7 @@
 export const site = {
   name: "Suzette Sun",
   fullName: "Suzette Elyza S. Sun",
-  role: "Digital Marketing | Campaigns | Marketing Operations",
+  role: "Digital Marketing | Campaigns | Content | Marketing Operations",
   email: "suzetteelyza2002@gmail.com",
   phone: "09167014456",
   /** E.164 for schema.org and international crawlers */
@@ -9,9 +9,9 @@ export const site = {
   location: "Imus, Cavite, Philippines",
   linkedin: "https://www.linkedin.com/in/suzettesun",
   /** ISO-8601 datetime for schema.org dateModified (Google rejects date-only) */
-  lastUpdated: "2026-08-25T12:00:00+08:00",
+  lastUpdated: "2026-09-07T20:00:00+08:00",
   positioning:
-    "Multidisciplinary marketing professional who plans, builds, and runs email campaigns, CRM systems, content, and SEO, from brief to report.",
+    "Multidisciplinary digital marketing professional who takes campaigns from planning through launch — social, email, CRM, automation, landing pages, SEO, and analytics — with international teams.",
   tagline: "Always learning. Always growing.",
   cvUrl: "/assets/Suzette-Sun-CV.pdf",
   url: "https://suzettesun.com",
@@ -55,50 +55,50 @@ export const servicesStrip = [
   "Virtual Assistance",
 ] as const;
 
-/** Core expertise columns from the CV, used in Services. */
+/** Core expertise columns from the CV. */
 export const expertiseClusters = [
   {
-    name: "Campaigns & Growth",
+    name: "Campaigns & Content",
     items: [
-      "Campaign strategy",
-      "Email marketing",
-      "Audience segmentation",
-      "A/B testing",
-      "Lead generation",
-      "Customer engagement",
-    ],
-  },
-  {
-    name: "Marketing Operations",
-    items: [
-      "CRM management",
-      "Marketing automation",
-      "Database management",
-      "Campaign workflows",
-      "UTM tracking",
-      "Reporting & analysis",
-    ],
-  },
-  {
-    name: "Content & Creative",
-    items: [
+      "Campaign planning",
       "Content strategy",
       "Social media",
-      "Graphic design",
-      "Email design",
-      "Lead magnets",
-      "Landing pages",
-      "Website content",
+      "Copy support",
+      "Audience engagement",
+      "Cross-channel execution",
     ],
   },
   {
-    name: "Digital & SEO",
+    name: "Email & CRM",
+    items: [
+      "Mailchimp",
+      "HubSpot",
+      "GoHighLevel",
+      "Newsletters",
+      "Segmentation",
+      "Automation",
+    ],
+  },
+  {
+    name: "Web & Conversion",
+    items: [
+      "Landing pages",
+      "Website content",
+      "WordPress",
+      "Lead magnets",
+      "Resource hubs",
+      "Campaign QA",
+    ],
+  },
+  {
+    name: "SEO, Analytics & AI",
     items: [
       "SEO",
       "YouTube optimization",
-      "Website management",
-      "Analytics",
-      "Conversion-focused content",
+      "Google Analytics",
+      "UTM tracking",
+      "A/B testing",
+      "AI-assisted research",
     ],
   },
 ] as const;

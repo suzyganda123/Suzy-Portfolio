@@ -32,15 +32,15 @@ export function About() {
             </h2>
             <div className="mt-6 space-y-5 text-[16.5px] leading-relaxed text-muted">
               <p>
-                I&apos;m Suzette Elyza Sun, a multidisciplinary marketing professional based in the Philippines.
-                I plan and run email campaigns, CRM systems, content, and SEO, coordinating with
-                cross-functional teams from the first brief through the final report.
+                I&apos;m Suzette Elyza Sun, a multidisciplinary digital marketing professional based in the Philippines.
+                I take marketing initiatives from planning through launch — social, email, CRM, automation, landing pages,
+                SEO, and analytics — coordinating with cross-functional teams along the way.
               </p>
               <p>
-                I&apos;ve built campaign systems for a US safety training company, led marketing for a
-                Singapore investment education brand, and supported international clients as a virtual
-                assistant. A psychology background (Magna Cum Laude) and credentials in psychometrics and HR
-                keep the work grounded in how people actually decide and engage.
+                I lead marketing for a Singapore investment education brand (Invest Intelligent), and I&apos;ve built
+                campaign systems for a U.S. safety training company (Atlantic Training). A psychology background
+                (Magna Cum Laude) and credentials in psychometrics and HR keep the work grounded in how people decide
+                and engage.
               </p>
             </div>
 

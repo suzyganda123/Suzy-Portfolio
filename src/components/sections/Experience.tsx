@@ -17,7 +17,7 @@ export function Experience() {
             <div className="lg:sticky lg:top-28">
               <SectionIntro
                 title="Experience"
-                description="Over four years across email, campaigns, content, and marketing systems — fully remote."
+                description="Campaign leadership, email systems, content, CRM automation, and marketing operations — fully remote with international teams."
               />
               <Reveal delay={0.08}>
                 <div className="glass-card mt-10 rounded-2xl p-6">

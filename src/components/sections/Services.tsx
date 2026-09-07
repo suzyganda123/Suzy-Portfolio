@@ -43,16 +43,23 @@ export function Services() {
         </div>
 
         <Reveal delay={0.12}>
-          <div className="glass-panel mt-6 flex flex-col gap-5 rounded-2xl px-6 py-5 md:flex-row md:items-center md:justify-between md:rounded-full md:px-8">
-            <h3 className="eyebrow !text-[11px]">Platforms &amp; tools</h3>
-            <ul className="flex flex-wrap items-center gap-x-6 gap-y-4" aria-label="Tools and platforms">
+          <div className="glass-panel mt-6 flex flex-col gap-5 rounded-2xl px-6 py-5 md:flex-row md:items-center md:justify-between md:gap-8 md:rounded-full md:px-8 md:py-4">
+            <h3 className="eyebrow shrink-0 !text-[11px]">Platforms &amp; tools</h3>
+            <ul className="flex flex-wrap items-center gap-x-5 gap-y-3.5 md:justify-end" aria-label="Tools and platforms">
               {tools.map((tool) => (
-                <li key={tool.name} className="flex items-center gap-2.5" title={tool.name}>
+                <li key={tool.name} className="flex items-center gap-2" title={tool.name}>
                   {tool.icon ? (
-                    <Image src={tool.icon} width={24} height={24} alt={tool.name} className="opacity-80" />
+                    <Image
+                      src={tool.icon}
+                      width={22}
+                      height={22}
+                      alt={tool.name}
+                      className="size-[22px] object-contain opacity-85"
+                    />
                   ) : (
-                    <span className="text-[13px] font-semibold tracking-wide text-muted">{tool.name}</span>
+                    <span className="text-[12.5px] font-semibold tracking-wide text-muted">{tool.name}</span>
                   )}
+                  <span className="sr-only">{tool.name}</span>
                 </li>
               ))}
             </ul>

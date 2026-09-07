@@ -236,6 +236,52 @@ export const projects: Project[] = [
     sourceFolder: "Social Posts",
   },
   {
+    slug: "invest-intelligent-product-guides",
+    title: "Product Guides & Trading Roadmaps",
+    company: "Invest Intelligent Pte Ltd",
+    year: "2024-2026",
+    category: ["lead-magnet", "content-marketing"],
+    role: ["Content design", "Product education", "Brand adaptation"],
+    tools: ["Canva", "GoHighLevel"],
+    summary:
+      "Curriculum roadmaps, payment decision guides, and smart-money education assets for Invest Intelligent and Core Invest Institute — designed to clarify offers and support student onboarding.",
+    deliverables: [
+      "FTT Core Trading Roadmap",
+      "MVI Options & 0DTE Payment Guide",
+      "FTT 101 Smart Money Concept",
+      "FTT 201 Professional Trading Blueprint",
+    ],
+    images: [
+      {
+        src: "/assets/work/guide-ii-ftt-core-roadmap.webp",
+        width: 893,
+        height: 1600,
+        alt: "FTT Core Trading Roadmap product guide for Core Invest Institute",
+      },
+      {
+        src: "/assets/work/guide-ii-mvi-options-payment.webp",
+        width: 1024,
+        height: 1536,
+        alt: "MVI Options and 0DTE payment decision guide for Market Vector Intelligence",
+      },
+      {
+        src: "/assets/work/guide-ii-ftt-101-smart-money.webp",
+        width: 893,
+        height: 1600,
+        alt: "FTT 101 Smart Money Concept educational guide",
+      },
+      {
+        src: "/assets/work/guide-ii-ftt-201-blueprint.webp",
+        width: 893,
+        height: 1600,
+        alt: "FTT 201 Professional Trading Blueprint guide cover",
+      },
+    ],
+    featured: false,
+    accent: "violet",
+    sourceFolder: "guidepost",
+  },
+  {
     slug: "lead-magnet-library",
     title: "Lead Magnet Library",
     company: "Atlantic Training",
@@ -289,13 +335,13 @@ export const projects: Project[] = [
     sourceFolder: "Guides, Checklists, and other Lead Magnets",
   },
   {
-    slug: "coreinvest-brand-social",
+    slug: "invest-intelligent-brand-social",
     title: "Brand Social & Event Funnels",
-    company: "Core Biz Hub (CoreInvest Institute)",
-    year: "2023-2026",
+    company: "Invest Intelligent Pte Ltd",
+    year: "2023-Present",
     category: ["social-media", "crm", "automation"],
     role: ["Content strategy", "Design", "CRM automation", "Event funnels"],
-    tools: ["GoHighLevel", "Canva", "Meta"],
+    tools: ["GoHighLevel", "Canva", "Meta", "n8n"],
     summary:
       "Brand social content and automated event funnels for a Singapore investment education brand, including registration workflows built in GoHighLevel.",
     deliverables: ["Brand social posts", "Event registration funnels", "Automated follow-ups", "Customer communications"],
@@ -304,7 +350,7 @@ export const projects: Project[] = [
         src: "/assets/work/social/social-cii-vesak.webp",
         width: 1080,
         height: 1080,
-        alt: "Vesak Day greeting card designed for CoreInvest Institute",
+        alt: "Vesak Day greeting card designed for Core Invest Institute",
       },
     ],
     featured: false,
@@ -315,4 +361,5 @@ export const projects: Project[] = [
 
 export const featuredProjects = projects.filter((p) => p.featured);
 export const archiveProjects = projects.filter((p) => !p.featured);
+export const guideProjects = projects.filter((p) => p.category.includes("lead-magnet"));
 export const caseStudy = projects.find((p) => p.slug === "coffee-and-compliance")!;
