@@ -362,22 +362,37 @@ body {
   transform: scale(1.04);
 }
 
-/* Capability strip — infinite horizontal marquee */
+/* Infinite services strip — duplicate track, translate -50% */
 .capability-marquee {
-  overflow: hidden;
-  width: 100%;
+  display: none;
+}
+.capability-marquee-static {
+  display: block;
+}
+.capability-marquee-static ul {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem 1.25rem;
+  white-space: normal;
 }
 
-.capability-marquee-track {
-  display: flex;
-  width: max-content;
-  align-items: center;
-  animation: capability-marquee 36s linear infinite;
-  will-change: transform;
-}
-
-.capability-marquee:hover .capability-marquee-track {
-  animation-play-state: paused;
+@media (prefers-reduced-motion: no-preference) {
+  .capability-marquee-static {
+    display: none;
+  }
+  .capability-marquee {
+    display: block;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .capability-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: capability-marquee 42s linear infinite;
+  }
+  .group\/marquee:hover .capability-marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes capability-marquee {
@@ -385,7 +400,6 @@ body {
     transform: translate3d(0, 0, 0);
   }
   to {
-    /* Track is duplicated 2x — shift by half for a seamless loop */
     transform: translate3d(-50%, 0, 0);
   }
 }
@@ -398,21 +412,11 @@ body {
   .zoom-frame:hover img {
     transform: none;
   }
-
-  .capability-marquee-track {
-    animation: none;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 100%;
-    justify-content: center;
-    row-gap: 0.55rem;
-    padding-inline: 1.25rem;
-  }
-
-  /* Hide the duplicated half under reduced motion */
-  .capability-marquee-track > li:nth-child(n + 10) {
+  .capability-marquee {
     display: none;
   }
+  .capability-marquee-static {
+    display: block;
+  }
 }
-} /* end @layer components */
-
+}
