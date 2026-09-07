@@ -362,6 +362,34 @@ body {
   transform: scale(1.04);
 }
 
+/* Capability strip — infinite horizontal marquee */
+.capability-marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.capability-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: capability-marquee 36s linear infinite;
+  will-change: transform;
+}
+
+.capability-marquee:hover .capability-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes capability-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    /* Track is duplicated 2x — shift by half for a seamless loop */
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .zoom-frame img {
     transition: none;
@@ -370,5 +398,21 @@ body {
   .zoom-frame:hover img {
     transform: none;
   }
+
+  .capability-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    row-gap: 0.55rem;
+    padding-inline: 1.25rem;
+  }
+
+  /* Hide the duplicated half under reduced motion */
+  .capability-marquee-track > li:nth-child(n + 10) {
+    display: none;
+  }
 }
-}
+} /* end @layer components */
+
