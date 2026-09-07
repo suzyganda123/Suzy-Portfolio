@@ -362,40 +362,68 @@ body {
   transform: scale(1.04);
 }
 
-/* Infinite services strip — duplicate track, translate -50% */
+@media (prefers-reduced-motion: reduce) {
+  .zoom-frame img {
+    transition: none;
+  }
+  .group:hover .zoom-frame img,
+  .zoom-frame:hover img {
+    transform: none;
+  }
+}
+}
+
+/* Marquee lives outside @layer so display/animation aren't fought by utilities.
+   Always single-line. Animation on by default; paused only for reduced-motion. */
+.capability-marquee-shell {
+  padding-block: 0.8rem;
+}
 .capability-marquee {
-  display: none;
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.capability-marquee-static {
-  display: block;
+.capability-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: capability-marquee-scroll 38s linear infinite;
+  will-change: transform;
 }
-.capability-marquee-static ul {
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.65rem 1.25rem;
-  white-space: normal;
+.capability-marquee:hover .capability-marquee-track {
+  animation-play-state: paused;
+}
+.capability-marquee-list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2.25rem;
+  padding-inline: 1.25rem;
+  margin: 0;
+  list-style: none;
+  flex-shrink: 0;
+}
+.capability-marquee-item {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.55rem;
+  white-space: nowrap;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+.capability-marquee-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #f04486, #ffaa3d);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .capability-marquee-static {
-    display: none;
-  }
-  .capability-marquee {
-    display: block;
-    overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  }
-  .capability-marquee-track {
-    display: flex;
-    width: max-content;
-    animation: capability-marquee 42s linear infinite;
-  }
-  .group\/marquee:hover .capability-marquee-track {
-    animation-play-state: paused;
-  }
-}
-
-@keyframes capability-marquee {
+@keyframes capability-marquee-scroll {
   from {
     transform: translate3d(0, 0, 0);
   }
@@ -405,18 +433,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .zoom-frame img {
-    transition: none;
+  /* Gentler loop — still single-line motion so the strip doesn't balloon */
+  .capability-marquee-track {
+    animation-duration: 90s;
   }
-  .group:hover .zoom-frame img,
-  .zoom-frame:hover img {
-    transform: none;
-  }
-  .capability-marquee {
-    display: none;
-  }
-  .capability-marquee-static {
-    display: block;
-  }
-}
 }
